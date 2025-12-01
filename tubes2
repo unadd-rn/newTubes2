@@ -87,3 +87,107 @@ def proses_pengiriman(lokasi_toko):
 
     return lokasi_pembeli, jasa, estimasi_final, ongkir_final
 
+# =========== KERANJANG ============
+
+keranjang = {} 
+
+products = {1: ("Tas", 40000), 2: ("celana", 80000), 3: ("baju", 60000)} #ini buat ngetes aja, nanti diganti ke kategori
+
+def show_products(): #menampilkan produk
+    print("===== DAFTAR BARANG =====")
+    for id, (produk, harga) in products.items():
+        print(f"{id}. {produk} - Rp{harga}")
+    print()
+
+def add_item(produk, harga, jumlah):
+    if produk in keranjang: #kalau produk yang sama sudah ada di keranjang, program menambah jumlah barang ke keranjang
+        keranjang[produk]["jumlah"] += jumlah
+    else:
+        keranjang[produk] = {"harga":harga, "jumlah":jumlah} #kalau sebelumnya belum ada produk yang sama di keranjang
+        print()
+        print(f"{jumlah} x {produk} ditambahkan ke keranjang")
+        print()
+
+def remove_item(produk, jumlah):
+    if produk not in keranjang: #kalau produk tidak ada di keranjang, tidak bisa menghapus produk dari keranjang
+        print()
+        print("barang tidak ditemukan di keranjang!")
+        print()
+        return
+    if jumlah >= keranjang[produk]["jumlah"]: #kalau jumlah suatu produk yang ingin dihapus lebih atau sama dengan jumlah yang ada di keranjang
+        del keranjang[produk]
+        print()
+        print(f"{produk} dihapus sepenuhnya dari keranjang!") #barang dihapus sepenuhnya
+        print()
+    else:
+        keranjang[produk]["jumlah"] -= jumlah
+        print()
+        print(f"{jumlah} x {produk} dihapus dari keranjang") #jumlah barang dikurangi dari keranjang
+        print()
+
+def view_cart():
+    print("======= ISI KERANJANG =======")
+
+    if not keranjang: #keranjang masih kosong
+        print("keranjang masih kosong")
+        print()
+        return
+    
+    total = 0
+    for produk, detail in keranjang.items():
+        harga = detail["harga"]
+        jumlah = detail["jumlah"]
+        subtotal = harga * jumlah
+        print(f"- {produk}: {jumlah} x Rp{harga} = Rp{subtotal}") #menghitung subtotal harga per produk
+        total += subtotal #total harga 
+
+    print(f"total belanja: Rp{total}")
+    print()
+
+
+while True:
+    print("============ MENU ============")
+    print("1. Lihat Daftar Barang")
+    print("2. Tambah Barang Ke Keranjang")
+    print("3. Hapus Barang Dari Keranjang")
+    print("4. Lihat Keranjang")
+    print("5. Checkout Barang")
+    print("==============================")
+    menu = int(input("pilih menu(1-5): "))
+    print()
+
+    if menu == 1:
+        show_products()
+
+    elif menu == 2:
+        id = int(input("masukkan ID barang: "))
+        jumlah = int(input("jumlah: "))
+
+        if id in products:
+            produk, harga = products[id]
+            add_item(produk, harga, jumlah)
+        else:
+            print("ID barang tidak valid!")
+            print()
+
+    elif menu == 3:
+        view_cart()
+        produk = input("Produk yang ingin dihapus: ")
+        jumlah = int(input("jumlah: "))
+        remove_item(produk, jumlah)
+
+    elif menu == 4:
+        view_cart()
+
+    elif menu == 5: #ini diganti aja, buat checkout disini
+        view_cart()
+        checkout = input("buat pesanan?(yes/no): ")
+        if checkout == "no":
+            print("kembali ke menu...")
+            print()
+        else:
+            print("pesanan dibuat...")
+            break
+        
+    else:
+        print("pilihan tidak valid!")
