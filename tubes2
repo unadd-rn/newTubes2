@@ -4,3 +4,86 @@
 #KAMUS
 
 #ALGORITMA
+
+# ============================================
+# DATA LOKASI & JARAK
+# ============================================
+
+kelurahan = ["Cibeusi", "Cikeruh", "Cilayung", "Cileles",
+             "Cinta Mulya", "Cipacing", "Cisempur", "Hegarmanah",
+             "Mekargalih", "Mekarwangi", "Sukajadi", "Sukamaju"]
+
+jarak = [
+ [0.0,1.2,2.0,3.0,1.5,3.2,3.8,4.5,5.2,5.5,3.6,4.0],
+ [1.2,0.0,1.1,2.3,1.0,2.9,3.5,4.0,4.7,5.1,3.2,3.8],
+ [2.0,1.1,0.0,1.8,1.5,2.4,3.0,3.6,4.2,4.6,2.9,3.4],
+ [3.0,2.3,1.8,0.0,2.4,2.0,2.7,3.1,3.7,4.1,2.3,2.8],
+ [1.5,1.0,1.5,2.4,0.0,2.8,3.4,4.0,4.8,5.1,3.3,3.9],
+ [3.2,2.9,2.4,2.0,2.8,0.0,1.3,1.9,3.1,3.6,1.8,2.5],
+ [3.8,3.5,3.0,2.7,3.4,1.3,0.0,1.2,2.5,3.0,2.1,2.7],
+ [4.5,4.0,3.6,3.1,4.0,1.9,1.2,0.0,1.8,2.3,2.7,3.2],
+ [5.2,4.7,4.2,3.7,4.8,3.1,2.5,1.8,0.0,1.2,3.5,3.9],
+ [5.5,5.1,4.6,4.1,5.1,3.6,3.0,2.3,1.2,0.0,3.9,4.2],
+ [3.6,3.2,2.9,2.3,3.3,1.8,2.1,2.7,3.5,3.9,0.0,1.3],
+ [4.0,3.8,3.4,2.8,3.9,2.5,2.7,3.2,3.9,4.2,1.3,0.0]
+]
+
+tarif_per_km = 7000
+waktu_per_km = 25 # menit
+
+# ============================================
+# DATA JASA PENGIRIMAN
+# ============================================
+
+jasa_pengiriman = {
+    "Ekonomis": {"waktu": +10,"ongkir": -2000},
+    "Reguler":  {"waktu": 0,  "ongkir": 0},
+    "Express":  {"waktu": -10,"ongkir": +2000}
+}
+
+def proses_pengiriman(lokasi_toko):
+    print("=== PILIH LOKASI PEMBELI ===")
+    for i, lok in enumerate(kelurahan):
+        print(f"{i+1}. {lok}")
+    
+    inputlokasi = False
+    while inputlokasi == False:
+        idx = int(input("Lokasi pembeli: ")) - 1
+        if 0 <= idx <=11:
+            inputlokasi = True
+        else :
+            print ("Duh, lokasi yang kamu pilid tidak valid nih, coba lagi ya...")
+            inputlokasi = False
+    lokasi_pembeli = kelurahan[idx]
+
+    # Hitung jarak dan ongkir dasar
+    d = hitung_jarak(lokasi_toko, lokasi_pembeli)
+    ongkir_dasar = int(d * tarif_per_km)
+    waktu_awal = int(d * waktu_per_km)   # MENIT
+
+    print("=== PILIH JASA PENGIRIMAN ===")
+    jasa_list = list(jasa_pengiriman.keys())
+
+    for i, j in enumerate(jasa_list):
+        efek = jasa_pengiriman[j]
+        e_waktu = waktu_awal + efek["waktu"]   # menit
+        e_ongkir = ongkir_dasar + efek["ongkir"]
+        print(f"{i+1}. {j} | Estimasi {e_waktu} menit | Rp{e_ongkir}")
+
+    pilihan = False
+    while pilihan == False:
+        pilih_jasa = int(input("Jenis jasa: ")) - 1
+        if 0 <= pilih_jasa <= 2:
+            pilihan = True
+        else :
+            print ("Duh, opsi yang kamu pilid tidak valid nih, coba lagi ya...")
+            pilihan = False
+
+    jasa = jasa_list[pilih_jasa]
+    efek = jasa_pengiriman[jasa]
+
+    estimasi_final = waktu_awal + efek["waktu"]
+    ongkir_final = ongkir_dasar + efek["ongkir"]
+
+    return lokasi_pembeli, jasa, estimasi_final, ongkir_final
+
