@@ -138,7 +138,7 @@ def view_cart():
         harga = detail["harga"]
         jumlah = detail["jumlah"]
         subtotal = harga * jumlah
-        print(f"- {produk}: {jumlah} x Rp{harga} = Rp{subtotal}") #menghitung subtotal harga per produk
+        print(f"- {produk}: {jumlah} x Rp{harga} = Rp{subtotal}")
         total += subtotal #total harga 
 
     print(f"total belanja: Rp{total}")
