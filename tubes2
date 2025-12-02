@@ -41,53 +41,23 @@ jasa_pengiriman = {
     "Express":  {"waktu": -10,"ongkir": +2000}
 }
 
-def proses_pengiriman(lokasi_toko):
-    print("=== PILIH LOKASI PEMBELI ===")
-    for i, lok in enumerate(kelurahan):
-        print(f"{i+1}. {lok}")
-    
-    inputlokasi = False
-    while inputlokasi == False:
-        idx = int(input("Lokasi pembeli: ")) - 1
-        if 0 <= idx <=11:
-            inputlokasi = True
-        else :
-            print ("Duh, lokasi yang kamu pilid tidak valid nih, coba lagi ya...")
-            inputlokasi = False
-    lokasi_pembeli = kelurahan[idx]
+# ============================================
+# DATA  OPSI PEMBAYARAN
+# ============================================
 
-    # Hitung jarak dan ongkir dasar
-    d = hitung_jarak(lokasi_toko, lokasi_pembeli)
-    ongkir_dasar = int(d * tarif_per_km)
-    waktu_awal = int(d * waktu_per_km)   # MENIT
+    metode_list = [
+        "GoPay / GoPay Later",
+        "Shopeepay / SPayLater",
+        "DANA",
+        "OVO",
+        "blu by BCA Digital",
+        "BCA Virtual Account",
+        "Mandiri Virtual Account",
+        "Transfer Bank Lainnya",
+        "Cash On Delivery"
+    ]
 
-    print("=== PILIH JASA PENGIRIMAN ===")
-    jasa_list = list(jasa_pengiriman.keys())
-
-    for i, j in enumerate(jasa_list):
-        efek = jasa_pengiriman[j]
-        e_waktu = waktu_awal + efek["waktu"]   # menit
-        e_ongkir = ongkir_dasar + efek["ongkir"]
-        print(f"{i+1}. {j} | Estimasi {e_waktu} menit | Rp{e_ongkir}")
-
-    pilihan = False
-    while pilihan == False:
-        pilih_jasa = int(input("Jenis jasa: ")) - 1
-        if 0 <= pilih_jasa <= 2:
-            pilihan = True
-        else :
-            print ("Duh, opsi yang kamu pilid tidak valid nih, coba lagi ya...")
-            pilihan = False
-
-    jasa = jasa_list[pilih_jasa]
-    efek = jasa_pengiriman[jasa]
-
-    estimasi_final = waktu_awal + efek["waktu"]
-    ongkir_final = ongkir_dasar + efek["ongkir"]
-
-    return lokasi_pembeli, jasa, estimasi_final, ongkir_final
-
-# =========== KERANJANG ============
+# ====================================== KERANJANG ===============================================
 
 keranjang = {} 
 
@@ -191,3 +161,147 @@ while True:
         
     else:
         print("pilihan tidak valid!")
+
+# ====================================== DELIVERY ===============================================
+
+def proses_pengiriman(lokasi_toko):
+    print("=== PILIH LOKASI PEMBELI ===")
+    for i, lok in enumerate(kelurahan):
+        print(f"{i+1}. {lok}")
+    
+    inputlokasi = False
+    while inputlokasi == False:
+        idx = int(input("Lokasi pembeli: ")) - 1
+        if 0 <= idx <=11:
+            inputlokasi = True
+        else :
+            print ("Duh, lokasi yang kamu pilid tidak valid nih, coba lagi ya...")
+            inputlokasi = False
+    lokasi_pembeli = kelurahan[idx]
+
+    # Hitung jarak dan ongkir dasar
+    d = hitung_jarak(lokasi_toko, lokasi_pembeli)
+    ongkir_dasar = int(d * tarif_per_km)
+    waktu_awal = int(d * waktu_per_km)   # MENIT
+
+    print("=== PILIH JASA PENGIRIMAN ===")
+    jasa_list = list(jasa_pengiriman.keys())
+
+    for i, j in enumerate(jasa_list):
+        efek = jasa_pengiriman[j]
+        e_waktu = waktu_awal + efek["waktu"]   # menit
+        e_ongkir = ongkir_dasar + efek["ongkir"]
+        print(f"{i+1}. {j} | Estimasi {e_waktu} menit | Rp{e_ongkir}")
+
+    pilihan = False
+    while pilihan == False:
+        pilih_jasa = int(input("Jenis jasa: ")) - 1
+        if 0 <= pilih_jasa <= 2:
+            pilihan = True
+        else :
+            print ("Duh, opsi yang kamu pilid tidak valid nih, coba lagi ya...")
+            pilihan = False
+
+    jasa = jasa_list[pilih_jasa]
+    efek = jasa_pengiriman[jasa]
+
+    estimasi_final = waktu_awal + efek["waktu"]
+    ongkir_final = ongkir_dasar + efek["ongkir"]
+
+    return lokasi_pembeli, jasa, estimasi_final, ongkir_final
+
+# ====================================== PEMBAYARAN ===============================================
+
+#Ini ngitung total bayar cuma aku ga tau ini bagian Livy atau siapa
+def total_barang():
+    total = 0
+    for produk, detail in keranjang.items():
+        total += detail["harga"] * detail["jumlah"]
+    return total
+
+
+#=== Bayar ====
+def pembayaran(ongkir_final):
+    #ini gw tambahin biaya admin karena kocak dikit aoawkoawkaow
+    biaya_admin = 1000
+
+    while True: 
+        print("=== PEMBAYARAN ===")
+        
+        # harga barang aja 
+        total_harga_barang = total_barang()
+        print(f"Total Harga Barang: Rp{total_harga_barang}")
+        print("(Belum termasuk admin dan ongkir)") #biaya admin surprise yey
+
+        print("=== METODE PEMBAYARAN ===")
+        for i, m in enumerate(metode_list):
+            print(f"{i+1}. {m}")
+
+        pilih = int(input("Pilih metode pembayaran: ")) - 1
+        if pilih < 0 or pilih >= len(metode_list):
+            print("Pilihan tidak valid!")
+            continue
+
+        metode = metode_list[pilih]
+
+        # === diskon ama ongkir ===
+        diskon = 0
+
+        if metode in ["GoPay / GoPay Later", "Shopeepay / SPayLater"]:
+            ongkir = 0  # free ongkir
+        else:
+            ongkir = ongkir_final
+
+        if metode in ["DANA", "OVO"]:
+            diskon = int(0.05 * total_harga_barang)
+
+        if metode in ["blu by BCA Digital", "BCA Virtual Account", "Mandiri Virtual Account"]:
+            diskon = int(0.10 * total_harga_barang)
+
+        # total akhir
+        total_bayar = total_harga_barang + ongkir + biaya_admin - diskon
+
+        # COD lain ga ada sisa saldo
+        if metode in ["Cash On Delivery"]:
+            print("\n===== STRUK PEMBAYARAN =====")
+            cetak_struk(ongkir, biaya_admin, diskon, metode, 0)
+            return
+
+        # user input saldo
+        saldo = int(input("Masukkan saldo kamu: Rp"))
+
+        if saldo < total_bayar + 1000:
+            print("Saldo tidak mencukupi! Harus ada minimal Rp1000 sisa saldo.")
+            print("Pilih metode pembayaran lain!\n")
+            continue
+
+        # saldo cukup habistu cetak sstruk
+        sisa_saldo = saldo - total_bayar
+
+        print("\n===== STRUK PEMBAYARAN =====")
+        cetak_struk(ongkir, biaya_admin, diskon, metode, sisa_saldo)
+        return
+
+
+#====STRUK=====
+# struk gw pisah lagi karena panjang banget anjayy i am not typing this down twice
+def cetak_struk(ongkir, admin, diskon, metode, sisa_saldo):
+    print("\n=========== STRUK BELANJA ===========")
+    for produk, detail in keranjang.items():
+        harga = detail["harga"]
+        jumlah = detail["jumlah"]
+        subtotal = harga * jumlah
+        print(f"{produk} | {jumlah} x Rp{harga} = Rp{subtotal}")
+
+    total_barang_harga = total_barang()
+    print("-------------------------------------")
+    print(f"Harga Barang       : Rp{total_barang_harga}")
+    print(f"Ongkir             : Rp{ongkir}")
+    print(f"Biaya Admin        : Rp{admin}")
+    print(f"Diskon             : Rp{diskon}")
+    total = total_barang_harga + ongkir + admin - diskon
+    print("-------------------------------------")
+    print(f"TOTAL BAYAR        : Rp{total}")
+    print(f"Metode Pembayaran  : {metode}")
+    print(f"Sisa Saldo         : Rp{sisa_saldo}")
+    print("=====================================\n")
