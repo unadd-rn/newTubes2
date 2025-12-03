@@ -114,8 +114,8 @@ def view_cart():
     print(f"total belanja: Rp{total}")
     print()
 
-
-while True:
+running = True
+while running:
     print("============ MENU ============")
     print("1. Lihat Daftar Barang")
     print("2. Tambah Barang Ke Keranjang")
@@ -157,7 +157,8 @@ while True:
             print()
         else:
             print("pesanan dibuat...")
-            break
+            print("estimasi waktu")
+            running = False
         
     else:
         print("pilihan tidak valid!")
