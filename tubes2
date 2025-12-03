@@ -61,7 +61,7 @@ jasa_pengiriman = {
 
 keranjang = {} 
 
-products = {1: ("Tas", 40000), 2: ("celana", 80000), 3: ("baju", 60000)} #ini buat ngetes aja, nanti diganti ke kategori
+products = {1: ("Tas", 40000), 2: ("celana", 80000), 3: ("baju", 60000)}
 
 def show_products(): #menampilkan produk
     print("===== DAFTAR BARANG =====")
@@ -72,6 +72,10 @@ def show_products(): #menampilkan produk
 def add_item(produk, harga, jumlah):
     if produk in keranjang: #kalau produk yang sama sudah ada di keranjang, program menambah jumlah barang ke keranjang
         keranjang[produk]["jumlah"] += jumlah
+    elif jumlah <= 0:
+        print(f"minimal pembelian 1 barang!")
+        print()
+        return
     else:
         keranjang[produk] = {"harga":harga, "jumlah":jumlah} #kalau sebelumnya belum ada produk yang sama di keranjang
         print()
@@ -100,7 +104,6 @@ def view_cart():
 
     if not keranjang: #keranjang masih kosong
         print("keranjang masih kosong")
-        print()
         return
     
     total = 0
@@ -108,7 +111,7 @@ def view_cart():
         harga = detail["harga"]
         jumlah = detail["jumlah"]
         subtotal = harga * jumlah
-        print(f"- {produk}: {jumlah} x Rp{harga} = Rp{subtotal}")
+        print(f"- {produk}: {jumlah} x Rp{harga} = Rp{subtotal}") #menghitung subtotal harga per produk
         total += subtotal #total harga 
 
     print(f"total belanja: Rp{total}")
@@ -153,6 +156,7 @@ while running:
         view_cart()
         print()
         checkout = input("buat pesanan?(yes/no): ")
+        print()
         if checkout == "no":
             print("kembali ke menu...")
             print()
