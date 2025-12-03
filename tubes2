@@ -1,3 +1,14 @@
+Aduh, maaf banget! Bagian kode interaktif untuk memilih kategori dan subkategori yang memungkinkan Anda melihat dan memilih barang secara berurutan memang sempat hilang karena saya mencoba menyederhanakan alur untuk Menu Utama, dan itu adalah kesalahan.
+
+Saya sudah mengembalikan dan mengintegrasikan alur interaktif penuh (Kategori > Subkategori > Barang) ke dalam Menu 2 (Tambah Barang Ke Keranjang).
+
+Berikut adalah kode yang sudah diperbaiki. Fokus perbaikan ada di fungsi add_item_to_cart().
+
+🛠️ Kode Program Sistem Delivery (Interaktif)
+Fungsi add_item_to_cart() sekarang akan memandu Anda memilih dari Kategori, lalu Subkategori (jika ada), kemudian menampilkan daftar barang di dalamnya.
+
+Python
+
 # ============================================
 # DATA LOKASI & JARAK
 # ============================================
@@ -292,10 +303,12 @@ def get_available_products(kelurahan_pembeli):
         if isi_kat_global is None:
              continue
         
+        # KATEGORI TANPA SUBKATEGORI
         if sub_list == []:
             for item in isi_kat_global:
                 available_products[product_id] = {"nama": item['nama'], "harga": item['harga']}
                 product_id += 1
+        # KATEGORI DENGAN SUBKATEGORI
         else:
             for nama_sub in sub_list:
                 daftar_barang = isi_kat_global.get(nama_sub)
@@ -373,33 +386,130 @@ def show_products():
     print()
 
 def add_item_to_cart():
-    """Menambahkan item ke keranjang berdasarkan ID dan jumlah."""
+    """Memilih barang secara interaktif (Kategori > Subkategori > Barang) dan menambahkannya ke keranjang."""
+    
     if not products:
-        print("Tidak ada barang tersedia untuk ditambahkan.")
+        print("Tidak ada barang tersedia untuk ditambahkan di kelurahan ini.")
         return
+    
+    # Kategori yang tersedia di kelurahan yang sudah dipilih
+    kat_tersedia = kat_kelurahan.get(kel_terpilih, {})
+    kat_list = list(kat_tersedia.keys())
 
-    show_products()
+    # 1. Pilih Kategori
+    while True:
+        print("\n===== DAFTAR KATEGORI =====")
+        print_kategori(kat_list)
+        print(f"{len(kat_list)+1}. Kembali ke Menu Utama")
+
+        try:
+            pilih_kat = int(input("Pilih kategori: "))
+        except ValueError:
+            print("Input tidak valid, masukkan angka.")
+            continue
+            
+        if pilih_kat == len(kat_list) + 1:
+            return
+
+        if 1 <= pilih_kat <= len(kat_list):
+            nama_kat = kat_list[pilih_kat - 1]
+            break
+        else:
+            print("Pilihan kategori tidak valid.")
+            
+    # subkategori yg ada di kelurahan ini
+    sub_kel = kat_tersedia[nama_kat]
+    isi_kat_global = kategori[nama_kat]
+
+    produk_terpilih = None
+
+    # 2. Proses Subkategori atau Langsung ke Barang
+    if sub_kel == []:
+        # Kategori tanpa Subkategori (misal: MINUMAN, ALAT TULIS)
+        daftar_barang = isi_kat_global
+        
+        while True:
+            print(f"\n===== {nama_kat} =====")
+            print_barang(daftar_barang)
+            
+            try:
+                pilih_brg = int(input("Pilih barang: "))
+            except ValueError:
+                print("Input tidak valid, masukkan angka.")
+                continue
+
+            if pilih_brg == len(daftar_barang) + 1:
+                break 
+
+            if 1 <= pilih_brg <= len(daftar_barang):
+                produk_terpilih = daftar_barang[pilih_brg - 1]
+                break
+            else:
+                print("Pilihan barang tidak valid.")
+                
+    else:
+        # Kategori dengan Subkategori
+        while True:
+            print(f"\n===== {nama_kat} =====")
+            print_kategori(sub_kel)
+            print(f"{len(sub_kel)+1}. Kembali ke Kategori")
+
+            try:
+                pilih_sub = int(input("Pilih subkategori: "))
+            except ValueError:
+                print("Input tidak valid, masukkan angka.")
+                continue
+                
+            if pilih_sub == len(sub_kel) + 1:
+                break 
+
+            if 1 <= pilih_sub <= len(sub_kel):
+                nama_sub = sub_kel[pilih_sub - 1]
+                daftar_barang = isi_kat_global[nama_sub]
+
+                # Pilih Barang
+                while True:
+                    print(f"\n===== {nama_sub} =====")
+                    print_barang(daftar_barang)
+                    
+                    try:
+                        pilih_brg = int(input("Pilih barang: "))
+                    except ValueError:
+                        print("Input tidak valid, masukkan angka.")
+                        continue
+
+                    if pilih_brg == len(daftar_barang) + 1:
+                        break # Kembali ke pemilihan subkategori
+
+                    if 1 <= pilih_brg <= len(daftar_barang):
+                        produk_terpilih = daftar_barang[pilih_brg - 1]
+                        break # Lanjut ke input jumlah
+                    else:
+                        print("Pilihan barang tidak valid.")
+                
+                if produk_terpilih:
+                    break # Keluar dari loop subkategori
+            else:
+                print("Pilihan subkategori tidak valid.")
+                
+    if produk_terpilih is None:
+        print("Pemilihan barang dibatalkan.")
+        return
+    
+    # 3. Input Jumlah dan Tambahkan ke Keranjang
+    produk = produk_terpilih["nama"]
+    harga = produk_terpilih["harga"]
+    
+    print(f"\nAnda memilih: {produk} - Rp{harga:,}")
     
     try:
-        id = int(input("Masukkan ID barang yang ingin dibeli: "))
-        jumlah = int(input("Jumlah: "))
+        jumlah = int(input("Masukkan jumlah yang ingin dibeli: "))
     except ValueError:
-        print("Input nggak valid, masukkan angka.")
-        print()
+        print("Input jumlah tidak valid, kembali ke menu.")
         return
 
-    if id not in products:
-        print("ID barang tidak valid!")
-        print()
-        return
-        
-    produk_detail = products[id]
-    produk = produk_detail["nama"]
-    harga = produk_detail["harga"]
-    
     if jumlah <= 0:
         print("Minimal pembelian 1 barang!")
-        print()
         return
         
     if produk in keranjang:
@@ -408,9 +518,8 @@ def add_item_to_cart():
         keranjang[produk] = {"harga":harga, "jumlah":jumlah}
         
     print()
-    print(f"{jumlah} x {produk} ditambahkan ke keranjang")
+    print(f"{jumlah} x {produk} ditambahkan ke keranjang.")
     print()
-
 
 def remove_item():
     """Menghapus item dari keranjang."""
@@ -580,6 +689,7 @@ def cetak_struk(ongkir, admin, diskon, metode, sisa_saldo):
 def pembayaran(ongkir_parameter):
     """Memproses pemilihan metode pembayaran dan perhitungan total biaya."""
     
+    #ini gw tambahin biaya admin karena kocak dikit aoawkoawkaow
     biaya_admin = 1000
 
     while True:
@@ -661,14 +771,14 @@ running = True
 while running:
     print("=" * 30)
     print("============ MENU ============")
-    print(f"Lokasi Anda: {kel_terpilih}")
+    print(f"Lokasi Anda: **{kel_terpilih}**")
     
     # Menampilkan ringkasan keranjang
     view_cart_summary()
     print("-" * 30)
     
-    print("1. Lihat Daftar Barang Tersedia")
-    print("2. Tambah Barang Ke Keranjang")
+    print("1. Lihat Daftar Barang Tersedia (Tidak interaktif)")
+    print("2. Tambah Barang Ke Keranjang (Interaktif Kategori)")
     print("3. Hapus Barang Dari Keranjang")
     print("4. Lihat Keranjang (Detail)")
     print("5. Checkout Barang")
@@ -684,9 +794,11 @@ while running:
     print()
 
     if menu == 1:
+        # Pilihan 1 hanya menunjukkan semua yang tersedia (output panjang)
         show_products()
 
     elif menu == 2:
+        # Pilihan 2 memanggil fungsi interaktif yang sudah diperbaiki
         add_item_to_cart()
 
     elif menu == 3:
