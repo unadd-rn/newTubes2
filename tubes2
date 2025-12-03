@@ -112,7 +112,6 @@ def view_cart():
         total += subtotal #total harga 
 
     print(f"total belanja: Rp{total}")
-    print()
 
 running = True
 while running:
@@ -148,9 +147,11 @@ while running:
 
     elif menu == 4:
         view_cart()
+        print()
 
     elif menu == 5: #ini diganti aja, buat checkout disini
         view_cart()
+        print()
         checkout = input("buat pesanan?(yes/no): ")
         if checkout == "no":
             print("kembali ke menu...")
