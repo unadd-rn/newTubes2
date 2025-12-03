@@ -309,6 +309,7 @@ kat_kelurahan = {
     }
 }
 
+
 # ================================= KATEGORI ==========================================
 
 def print_kategori(lst):
@@ -647,16 +648,32 @@ def cetak_struk(ongkir, admin, diskon, metode, sisa_saldo):
 # aslinya harusnya masih kepanggil sih
 # cuma kayak jelek??? idkkk
 
+products = {}
+product_id_counter = 1
+for cat, subcat_data in kategori.items():
+    if isinstance(subcat_data, dict):
+        for subcat, items in subcat_data.items():
+            for item in items:
+                products[product_id_counter] = (item["nama"], item["harga"])
+                product_id_counter += 1
+    elif isinstance(subcat_data, list):
+        for item in subcat_data:
+            products[product_id_counter] = (item["nama"], item["harga"])
+            product_id_counter += 1
+
+toko_index = 0
+
 running = True
 while running:
     print("============ MENU ============")
-    print("1. Lihat Daftar Barang")
-    print("2. Tambah Barang Ke Keranjang")
+    print("1. Lihat Daftar Barang (berdasarkan Kelurahan)")
+    print("2. Tambah Barang Ke Keranjang (via ID Global)")
     print("3. Hapus Barang Dari Keranjang")
     print("4. Lihat Keranjang")
     print("5. Checkout Barang")
     print("6. Keluar")
     print("==============================")
+    menu = -1
     try:
         menu = int(input("pilih menu(1-6): "))
     except ValueError:
@@ -666,65 +683,213 @@ while running:
     print()
 
     if menu == 1:
-        show_products()
+        print("===== PILIH KELURAHAN =====")
+        # i = index loop
+        i = 1
+        for k in kelurahan:
+            print(f"{i}. {k}")
+            i += 1
+
+        idx_kel = -1
+        try:
+            idx_kel = int(input("Pilih nomor: ")) - 1
+        except ValueError:
+            print("Input tidak valid. Kembali ke menu.")
+            continue
+
+        if not (0 <= idx_kel < len(kelurahan)):
+            print("Pilihan kelurahan tidak valid. Kembali ke menu.")
+            continue
+
+        kel_terpilih = kelurahan[idx_kel]
+
+        print(f"\nKelurahan dipilih: {kel_terpilih}")
+
+        # kategori yg tersedia di kelurahan itu
+        kat_tersedia = kat_kelurahan.get(kel_terpilih, {})
+        kat_list = list(kat_tersedia.keys())
+        
+        if not kat_list:
+            print("Tidak ada kategori barang tersedia di kelurahan ini.")
+            continue
+
+
+        # 2. MENU KATEGORI
+        while True:
+            print("\n===== DAFTAR KATEGORI =====")
+            print_kategori(kat_list)
+            print(f"{len(kat_list)+1}. Selesai Pemilihan Barang")
+
+            pilih_kat = -1
+            try:
+                pilih_kat = int(input("Pilih kategori: "))
+            except ValueError:
+                print("Input tidak valid. Coba lagi.")
+                continue
+
+            if pilih_kat == len(kat_list) + 1:
+                break
+            
+            if not (1 <= pilih_kat <= len(kat_list)):
+                print("Pilihan kategori tidak valid. Coba lagi.")
+                continue
+
+            nama_kat = kat_list[pilih_kat - 1]
+
+            # subkategori yg ada di kelurahan ini
+            sub_kel = kat_tersedia[nama_kat]
+            isi_kat_global = kategori[nama_kat]
+
+            # 3A. KATEGORI TANPA SUBKATEGORI
+            if sub_kel == []:
+                while True:
+                    print(f"\n===== {nama_kat} =====")
+                    print_barang(isi_kat_global)
+                    pilih_brg = -1
+                    try:
+                        pilih_brg = int(input("Pilih barang: "))
+                    except ValueError:
+                        print("Input tidak valid. Coba lagi.")
+                        continue
+
+                    if pilih_brg == len(isi_kat_global) + 1:
+                        break
+
+                    if not (1 <= pilih_brg <= len(isi_kat_global)):
+                        print("Pilihan barang tidak valid. Coba lagi.")
+                        continue
+                    
+                    brg = isi_kat_global[pilih_brg - 1]
+                    print(f"Anda memilih: {brg['nama']} - Rp{brg['harga']:,}")
+
+                    try:
+                        jumlah = int(input("Masukkan jumlah: "))
+                        add_item(brg['nama'], brg['harga'], jumlah)
+                    except ValueError:
+                        print("Input jumlah tidak valid. Batalkan penambahan.")
+                        
+                continue
+
+
+            # 4. PILIH SUBKATEGORI
+            while True:
+                print(f"\n===== {nama_kat} =====")
+                print_kategori(sub_kel)
+                print(f"{len(sub_kel)+1}. Kembali ke Kategori")
+
+                pilih_sub = -1
+                try:
+                    pilih_sub = int(input("Pilih subkategori: "))
+                except ValueError:
+                    print("Input tidak valid. Coba lagi.")
+                    continue
+
+                if pilih_sub == len(sub_kel) + 1:
+                    break
+                
+                if not (1 <= pilih_sub <= len(sub_kel)):
+                    print("Pilihan subkategori tidak valid. Coba lagi.")
+                    continue
+
+                nama_sub = sub_kel[pilih_sub - 1]
+                daftar_barang = isi_kat_global[nama_sub]
+
+                # 5. PILIH BARANG
+                while True:
+                    print(f"\n===== {nama_sub} =====")
+                    print_barang(daftar_barang)
+                    pilih_brg = -1
+                    try:
+                        pilih_brg = int(input("Pilih barang: "))
+                    except ValueError:
+                        print("Input tidak valid. Coba lagi.")
+                        continue
+
+                    if pilih_brg == len(daftar_barang) + 1:
+                        break
+                    
+                    if not (1 <= pilih_brg <= len(daftar_barang)):
+                        print("Pilihan barang tidak valid. Coba lagi.")
+                        continue
+
+                    brg = daftar_barang[pilih_brg - 1]
+                    print(f"Anda memilih: {brg['nama']} - Rp{brg['harga']:,}")
+                    
+                    try:
+                        jumlah = int(input("Masukkan jumlah: "))
+                        add_item(brg['nama'], brg['harga'], jumlah)
+                    except ValueError:
+                        print("Input jumlah tidak valid. Batalkan penambahan.")
+            continue
+        continue
 
     elif menu == 2:
+        show_products()
+
+        id_brg = -1
+        jumlah = -1
         try:
-            id = int(input("masukkan ID barang: "))
+            id_brg = int(input("masukkan ID barang: "))
             jumlah = int(input("jumlah: "))
         except ValueError:
             print("Input nggak valid, masukkan angka.")
             print()
             continue
 
-        if id in products:
-            produk, harga = products[id]
-            add_item(produk, harga, jumlah)
+        if id_brg in products:
+            barang, harga = products[id_brg]
+            add_item(barang, harga, jumlah)
         else:
             print("ID barang tidak valid!")
             print()
 
     elif menu == 3:
         view_cart()
-        produk = input("Produk yang ingin dihapus: ")
+        if not keranjang:
+            continue
+        
+        hapus = input("Produk yang ingin dihapus: ")
+        jumlah = -1
         try:
             jumlah = int(input("jumlah: "))
         except ValueError:
             print("Input nggak valid, masukkan angka.")
             continue
-        remove_item(produk, jumlah)
+        remove_item(hapus, jumlah)
 
     elif menu == 4:
         view_cart()
         print()
 
-    elif menu == 5: #ini diganti aja, buat checkout disini
-        view_cart()
-        print()
+    elif menu == 5:
+        if not keranjang:
+            print("Keranjang kosong. Tambah barang dulu sebelum checkout.\n")
+            continue
+        
+        # --- PENAMBAHAN TAMPILAN KERANJANG SEBELUM CHECKOUT ---
+        print("====================================")
+        print("ANDA AKAN MELAKUKAN CHECKOUT. MOHON PERIKSA PESANAN ANDA:")
+        view_cart() 
+        print("====================================")
+        
         checkout = input("buat pesanan?(yes/no): ").strip().lower()
         print()
         if checkout == "no" or checkout == "n":
             print("kembali ke menu...")
             print()
         else:
-            if not keranjang:
-                print("Keranjang kosong. Tambah barang dulu sebelum checkout.\n")
-                continue
-
             print("pesanan dibuat...")
             print("estimasi waktu")
 
-            #Ini aku panggil sistem delivery
-            # MISAL toko ada di indeks 0 (Cibeusi), ganti jika perlu
-            toko_index = 0
+            # Sistem delivery
             lokasi_pembeli, jasa, estimasi_final, ongkir_final = proses_pengiriman(toko_index)
 
             print(f"Estimasi waktu: {estimasi_final} menit")
-            print(f"Ongkir: Rp{ongkir_final}\n")
+            print(f"Ongkir: Rp{ongkir_final:,}")
 
-            # lanjut pembayaran (kirim ongkir_final sebagai parameter)
+            # Lanjut pembayaran
             pembayaran(ongkir_final)
-            # setelah selesai pembayaran, bisa lanjut atau keluar
+            
             running = False
 
     elif menu == 6:
