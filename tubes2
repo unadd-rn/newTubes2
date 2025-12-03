@@ -57,6 +57,158 @@ jasa_pengiriman = {
         "Cash On Delivery"
     ]
 
+# ============================================
+# DATA KATEGORI BARANG
+# ============================================
+kategori = {
+    "MAKANAN": {
+        "MAKANAN SIAP SAJI": [
+            {"nama": "Nasi Ayam Geprek", "harga": 15000},
+            {"nama": "Nasi Ayam Serundeng", "harga": 15000},
+            {"nama": "Nasi Goreng Spesial", "harga": 18000},
+            {"nama": "Nasi Capcay", "harga": 18000},
+            {"nama": "Mie Goreng Spesial", "harga": 18000},
+            {"nama": "Mie Kuah Spesial", "harga": 20000},
+            {"nama": "Kwetiau Goreng", "harga": 23000},
+            {"nama": "Kwetiau Kuah", "harga": 24000},
+            {"nama": "Kwetiau Siram", "harga": 25000},
+            {"nama": "Bihun Kuah", "harga": 18000},
+        ],
+
+        "MAKANAN INSTAN": [
+            {"nama": "Nasi Instan Cup", "harga": 15000},
+            {"nama": "Indomie Goreng 1pcs", "harga": 3500},
+            {"nama": "Indomie Kari Ayam 1pcs", "harga": 3500},
+            {"nama": "Mie Sedaap Soto 1pcs", "harga": 3500},
+            {"nama": "Super Bihun Kuah Ayam 1pcs", "harga": 5000},
+            {"nama": "Super Bihun Goreng 1pcs", "harga": 5000},
+            {"nama": "Bubur Instan Ayam 1pcs", "harga": 8000},
+            {"nama": "Sup Krim Instan Jagung 1pcs", "harga": 10000},
+            {"nama": "ABC Sarden Saus cabai 155gr", "harga": 20000},
+            {"nama": "PRONAS Kornet Daging Sapi 198gr", "harga": 28000},
+        ],
+
+        "MAKANAN RINGAN": [
+            {"nama": "Chuba Keripik Singkong Balado 125gr", "harga": 13000},
+            {"nama": "Chitato Keripik Kentang BBQ 115gr", "harga": 18000},
+            {"nama": "Happy Tos keripik Tortilla Ori 140gr", "harga": 12000},
+            {"nama": "Rebo Kuaci Rasa Keju 140gr", "harga": 18000},
+            {"nama": "Good Time Cookies Klasik 72gr", "harga": 10000},
+            {"nama": "Regal Biskuit Marie 230gr", "harga": 26000},
+            {"nama": "Khong Guan Mini Merah Kaleng 650gr", "harga": 63000},
+            {"nama": "Mr. Mallow Marshmallow Stik 50gr", "harga": 10000},
+            {"nama": "Jelly Cup Pack 10", "harga": 12000},
+        ],
+
+        "BAHAN MAKANAN": [
+            {"nama": "Beras Putih 5kg", "harga": 65000},
+            {"nama": "Minyak Goreng 2L", "harga": 32000},
+            {"nama": "Tepung Terigu 1kg", "harga": 12000},
+            {"nama": "Telur Ayam 1kg", "harga": 30000},
+            {"nama": "Daging Sapi 1kg", "harga": 145000},
+            {"nama": "Fillet Ayam 1kg", "harga": 40000},
+            {"nama": "Ikan Kembung 1kg", "harga": 35000},
+            {"nama": "Kentang Sayur 1kg", "harga": 18000},
+            {"nama": "Bawang Merah 500gr", "harga": 15000},
+            {"nama": "Tomat Merah 1kg", "harga": 15000},
+            {"nama": "Tomat Ceri 250gr", "harga": 13000},
+        ]
+    },
+
+    "MINUMAN": [
+        {"nama": "Air Mineral 1.5L", "harga": 6500},
+        {"nama": "Air Galon 19L", "harga": 25000},
+        {"nama": "Buavita Jus Buah Mangga 1L", "harga": 33000},
+        {"nama": "Fruit Tea Teh Apel 250ml", "harga": 3500},
+        {"nama": "Teh Pucuk Harum Melati 350ml", "harga": 3500},
+        {"nama": "Coca-Cola Zero Sugar 1L", "harga": 10500},
+        {"nama": "Sprite Zero Sugar 1L", "harga": 10500},
+        {"nama": "Larutan Penyegar Cap Badak 350ml", "harga": 8500},
+        {"nama": "Ultra Milk Susu UHT Full Cream 1L", "harga": 22500},
+        {"nama": "Mizone Activ Lemon Leci 500ml", "harga": 6500},
+    ],
+
+    "ALAT TULIS": [
+        {"nama": "Buku Tulis SIDU Pack 10", "harga": 30000},
+        {"nama": "Pulpen Hitam Standard Joyko", "harga": 1000},
+        {"nama": "Pensil 2B Joyko", "harga": 1000},
+        {"nama": "Penghapus Pensil Faber-Castell", "harga": 8000},
+        {"nama": "STABILO Pastel Pink", "harga": 13000},
+        {"nama": "Paper Glue Stick Bantex 35gr", "harga": 14000},
+        {"nama": "Penggaris Butterfly 30cm", "harga": 3000},
+        {"nama": "Spidol Papan Tulis Snowman", "harga": 12500},
+    ],
+
+    "PERAWATAN DIRI": {
+        "PERAWATAN_TUBUH": [
+            {"nama": "Sabun Mandi Cair 450ml", "harga": 25000},
+            {"nama": "Shampo 170ml", "harga": 20000},
+            {"nama": "Pasta Gigi 150gr", "harga": 15000},
+            {"nama": "Sikat Gigi Medium", "harga": 8000},
+            {"nama": "Deodoran Roll-on", "harga": 20000},
+            {"nama": "Sabun Cuci Muka", "harga": 22000},
+            {"nama": "Hand Body Lotion 250ml", "harga": 25000},
+            {"nama": "Sisir Rambut Plastik", "harga": 10000},
+            {"nama": "Pencukur Sekali Pakai Pack 5", "harga": 18000},
+            {"nama": "Kapas Wajah Kotak", "harga": 10000},
+        ],
+
+        "KOSMETIK": [
+            {"nama": "Lipstik Matte", "harga": 60000},
+            {"nama": "Foundation 30ml", "harga": 85000},
+            {"nama": "Bedak Tabur Compact", "harga": 45000},
+            {"nama": "Eyeliner Cair", "harga": 35000},
+            {"nama": "Maskara Waterproof", "harga": 40000},
+            {"nama": "Pensil Alis", "harga": 25000},
+            {"nama": "Sheet Mask Satuan", "harga": 15000},
+            {"nama": "Micellar Water 100ml", "harga": 28000},
+            {"nama": "Cat Kuku", "harga": 12000},
+            {"nama": "Parfum EDT 50ml", "harga": 75000},
+        ]
+    },
+
+    "KEBUTUHAN RUMAH": {
+        "KEBERSIHAN_RUMAH": [
+            {"nama": "Deterjen Bubuk 800gr", "harga": 28000},
+            {"nama": "Pembersih Lantai 800ml", "harga": 18000},
+            {"nama": "Pencuci Piring 800ml", "harga": 15000},
+            {"nama": "Pemutih Pakaian 1L", "harga": 10000},
+            {"nama": "Pelembut Pakaian 700ml", "harga": 20000},
+            {"nama": "Pembersih Kaca 500ml", "harga": 17000},
+            {"nama": "Sabun Tangan Refill", "harga": 15000},
+            {"nama": "Sikat Baju", "harga": 5000},
+            {"nama": "Kain Pel Lantai", "harga": 15000},
+            {"nama": "Penghilang Noda Pakaian", "harga": 25000},
+        ],
+
+        "PERLENGKAPAN_RUMAH": [
+            {"nama": "Tisu Wajah Box", "harga": 20000},
+            {"nama": "Kantong Sampah Pack 20", "harga": 15000},
+            {"nama": "Baterai AA Pack 4", "harga": 18000},
+            {"nama": "Lampu LED 10W", "harga": 30000},
+            {"nama": "Korek Api Gas", "harga": 5000},
+            {"nama": "Gembok Kecil", "harga": 25000},
+            {"nama": "Solasi Besar", "harga": 8000},
+            {"nama": "Alumunium Foil Roll", "harga": 35000},
+            {"nama": "Spons Cuci Piring Pack 3", "harga": 10000},
+            {"nama": "Pengharum Ruangan Refill", "harga": 40000},
+        ],
+
+        "PEMBASMI_HAMA": [
+            {"nama": "Obat Nyamuk Bakar Pack 10", "harga": 5000},
+            {"nama": "Semprotan Anti Nyamuk 600ml", "harga": 35000},
+            {"nama": "Perangkap Tikus Lem", "harga": 10000},
+            {"nama": "Kapur Ajaib Anti Semut", "harga": 8000},
+            {"nama": "Gel Pembasmi Kecoa", "harga": 25000},
+            {"nama": "Obat Anti Rayap Cair", "harga": 60000},
+            {"nama": "Racun Tikus Padat", "harga": 15000},
+            {"nama": "Pengusir Kecoa Elektrik", "harga": 45000},
+            {"nama": "Spray Pengusir Laba-laba", "harga": 30000},
+            {"nama": "Anti Serangga Tanaman", "harga": 20000},
+        ]
+    }
+}
+
 # ====================================== KERANJANG ===============================================
 
 keranjang = {} 
