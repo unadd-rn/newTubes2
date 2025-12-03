@@ -2,6 +2,47 @@
 #Sistem delivery yang memungkinkan pengguna untuk memilih dari beberapa opsi, memasukkan ke kantung belanja, menghitung ongkos kirim, dan melakukan pembayaran
 
 #KAMUS
+# Keranjang & Produk
+# keranjang = list - item pembelian (string)
+# harga_barang = list - harga masing-masing barang (int)
+# total_barang = int - total harga semua barang sebelum ongkir
+# barang = string - input nama barang yg mau ditambah
+# harga = int - harga item yg cocok dalam list harga_barang
+# found = bool - indikator apakah barang ditemukan
+# hapus = string - nama barang yang ingin dihapus
+# i = int - index loop (ini kenapa dijadiin variabel gengs)
+
+# Lokasi & Perhitungan Jarak
+# kelurahan = list - daftar nama kelurahan (string)
+# jarak = list of lists (ini matriks ga si ahay) - jarak antar kelurahan (int)
+# lokasi_toko = int - index lokasi toko di list kelurahan
+# lokasi_pembeli = string - nama kelurahan pembeli
+# idx_toko = int - index lokasi toko (buat rumus jarak)
+# idx_pembeli = int - index lokasi pembeli
+# jarak_tempuh = int - hasil perhitungan jarak antar lokasi
+
+# Ongkir & Pengiriman
+# jasa = string - nama jasa pengiriman yang dipilih
+# estimasi = int - estimasi waktu per km (menit)
+# ongkir = int - ongkir per km (rupiah)
+# estimasi_final = int - total waktu (menit) setelah dikali jarak
+# ongkir_final = int - total ongkir setelah dikali jarak
+# idx_jasa = int - index jasa pengiriman dalam list
+
+# Pembayaran
+# metode_list = list - daftar metode pembayaran (string)
+# metode = string - input metode bayar yang dipilih user
+# biaya_admin = int - biaya admin sesuai metode pembayaran
+# total = int - ini ngitung total yang harus dibayar (barang + ongkir + admin)
+
+# Menu
+# menu = int - pilihan menu utama (1–5) nanti user pilih
+# running = bool - status loop menu
+# checkout = string - input “yes/no” sebelum checkout
+
+# Program utama
+# x = int - ini indeks dalam loop saat mencari barang
+# buat_struk = bool (kalau ada) - ini kalau ada aja
 
 #ALGORITMA
 
@@ -45,17 +86,17 @@ jasa_pengiriman = {
 # DATA  OPSI PEMBAYARAN
 # ============================================
 
-    metode_list = [
-        "GoPay / GoPay Later",
-        "Shopeepay / SPayLater",
-        "DANA",
-        "OVO",
-        "blu by BCA Digital",
-        "BCA Virtual Account",
-        "Mandiri Virtual Account",
-        "Transfer Bank Lainnya",
-        "Cash On Delivery"
-    ]
+metode_list = [
+  "GoPay / GoPay Later",
+  "Shopeepay / SPayLater",
+  "DANA",
+  "OVO",
+  "blu by BCA Digital",
+  "BCA Virtual Account",
+  "Mandiri Virtual Account",
+  "Transfer Bank Lainnya",
+  "Cash On Delivery"
+]
 
 # ============================================
 # DATA KATEGORI BARANG
@@ -211,9 +252,7 @@ kategori = {
 
 # ====================================== KERANJANG ===============================================
 
-keranjang = {} 
-
-products = {1: ("Tas", 40000), 2: ("celana", 80000), 3: ("baju", 60000)}
+keranjang = {}
 
 def show_products(): #menampilkan produk
     print("===== DAFTAR BARANG =====")
@@ -257,80 +296,45 @@ def view_cart():
     if not keranjang: #keranjang masih kosong
         print("keranjang masih kosong")
         return
-    
+
     total = 0
     for produk, detail in keranjang.items():
         harga = detail["harga"]
         jumlah = detail["jumlah"]
         subtotal = harga * jumlah
         print(f"- {produk}: {jumlah} x Rp{harga} = Rp{subtotal}") #menghitung subtotal harga per produk
-        total += subtotal #total harga 
+        total += subtotal #total harga
 
     print(f"total belanja: Rp{total}")
 
-running = True
-while running:
-    print("============ MENU ============")
-    print("1. Lihat Daftar Barang")
-    print("2. Tambah Barang Ke Keranjang")
-    print("3. Hapus Barang Dari Keranjang")
-    print("4. Lihat Keranjang")
-    print("5. Checkout Barang")
-    print("==============================")
-    menu = int(input("pilih menu(1-5): "))
-    print()
-
-    if menu == 1:
-        show_products()
-
-    elif menu == 2:
-        id = int(input("masukkan ID barang: "))
-        jumlah = int(input("jumlah: "))
-
-        if id in products:
-            produk, harga = products[id]
-            add_item(produk, harga, jumlah)
-        else:
-            print("ID barang tidak valid!")
-            print()
-
-    elif menu == 3:
-        view_cart()
-        produk = input("Produk yang ingin dihapus: ")
-        jumlah = int(input("jumlah: "))
-        remove_item(produk, jumlah)
-
-    elif menu == 4:
-        view_cart()
-        print()
-
-    elif menu == 5: #ini diganti aja, buat checkout disini
-        view_cart()
-        print()
-        checkout = input("buat pesanan?(yes/no): ")
-        print()
-        if checkout == "no":
-            print("kembali ke menu...")
-            print()
-        else:
-            print("pesanan dibuat...")
-            print("estimasi waktu")
-            running = False
-        
-    else:
-        print("pilihan tidak valid!")
-
 # ====================================== DELIVERY ===============================================
+def hitung_jarak(toko, pembeli):
+    # toko: indeks (0..n), pembeli: nama kelurahan
+    idx_toko = toko
+    try:
+        idx_pembeli = kelurahan.index(pembeli)
+    except ValueError:
+        # jika pembeli sudah diberikan sebagai indeks
+        if isinstance(pembeli, int) and 0 <= pembeli < len(kelurahan):
+            idx_pembeli = pembeli
+        else:
+            raise
+    return jarak[idx_toko][idx_pembeli]
 
 def proses_pengiriman(lokasi_toko):
     print("=== PILIH LOKASI PEMBELI ===")
     for i, lok in enumerate(kelurahan):
         print(f"{i+1}. {lok}")
-    
+
     inputlokasi = False
     while inputlokasi == False:
-        idx = int(input("Lokasi pembeli: ")) - 1
-        if 0 <= idx <=11:
+        try:
+            idx = int(input("Lokasi pembeli: ")) - 1
+        except ValueError:
+            print("Input nggak valid, masukkan angka ya.")
+            continue
+
+        if 0 <= idx <= 11:
             inputlokasi = True
         else :
             print ("Duh, lokasi yang kamu pilid tidak valid nih, coba lagi ya...")
@@ -353,8 +357,13 @@ def proses_pengiriman(lokasi_toko):
 
     pilihan = False
     while pilihan == False:
-        pilih_jasa = int(input("Jenis jasa: ")) - 1
-        if 0 <= pilih_jasa <= 2:
+        try:
+            pilih_jasa = int(input("Jenis jasa: ")) - 1
+        except ValueError:
+            print("Input nggak valid, masukkan angka ya.")
+            continue
+
+        if 0 <= pilih_jasa < len(jasa_list):
             pilihan = True
         else :
             print ("Duh, opsi yang kamu pilid tidak valid nih, coba lagi ya...")
@@ -379,14 +388,14 @@ def total_barang():
 
 
 #=== Bayar ====
-def pembayaran(ongkir):
+def pembayaran(ongkir_parameter):
     #ini gw tambahin biaya admin karena kocak dikit aoawkoawkaow
     biaya_admin = 1000
 
-    while True: 
+    while True:
         print("=== PEMBAYARAN ===")
-        
-        # harga barang aja 
+
+        # harga barang aja
         total_harga_barang = total_barang()
         print(f"Total Harga Barang: Rp{total_harga_barang}")
         print("(Belum termasuk admin dan ongkir)") #biaya admin surprise yey
@@ -395,7 +404,12 @@ def pembayaran(ongkir):
         for i, m in enumerate(metode_list):
             print(f"{i+1}. {m}")
 
-        pilih = int(input("Pilih metode pembayaran: ")) - 1
+        try:
+            pilih = int(input("Pilih metode pembayaran: ")) - 1
+        except ValueError:
+            print("Pilihan tidak valid! (masukkan angka)")
+            continue
+
         if pilih < 0 or pilih >= len(metode_list):
             print("Pilihan tidak valid!")
             continue
@@ -405,10 +419,11 @@ def pembayaran(ongkir):
         # === diskon ama ongkir ===
         diskon = 0
 
+        # jika metode pengiriman promo (kode sebelumnya: GoPay/Shopeepay free ongkir)
         if metode in ["GoPay / GoPay Later", "Shopeepay / SPayLater"]:
             ongkir = 0  # free ongkir
         else:
-            ongkir = ongkir_final
+            ongkir = ongkir_parameter
 
         if metode in ["DANA", "OVO"]:
             diskon = int(0.05 * total_harga_barang)
@@ -426,7 +441,11 @@ def pembayaran(ongkir):
             return
 
         # user input saldo
-        saldo = int(input("Masukkan saldo kamu: Rp"))
+        try:
+            saldo = int(input("Masukkan saldo kamu: Rp"))
+        except ValueError:
+            print("Input saldo tidak valid! masukkan angka.")
+            continue
 
         if saldo < total_bayar + 1000:
             print("Saldo tidak mencukupi! Harus ada minimal Rp1000 sisa saldo.")
@@ -444,22 +463,119 @@ def pembayaran(ongkir):
 #====STRUK=====
 # struk gw pisah lagi karena panjang banget anjayy i am not typing this down twice
 def cetak_struk(ongkir, admin, diskon, metode, sisa_saldo):
-    print("\n=========== STRUK BELANJA ===========")
-    for produk, detail in keranjang.items():
-        harga = detail["harga"]
-        jumlah = detail["jumlah"]
-        subtotal = harga * jumlah
-        print(f"{produk} | {jumlah} x Rp{harga} = Rp{subtotal}")
+    print("===== STRUK PEMBAYARAN =====")
+    print("Barang yang dibeli:")
 
-    total_barang_harga = total_barang()
-    print("-------------------------------------")
-    print(f"Harga Barang       : Rp{total_barang_harga}")
+    total_harga_barang = 0
+    for produk, detail in keranjang.items():
+        subtotal = detail["harga"] * detail["jumlah"]
+        total_harga_barang += subtotal
+        print(f"- {produk} ({detail['jumlah']} x Rp{detail['harga']}) = Rp{subtotal}")
+
+    print("\n----------------------------------")
+    print(f"Total Harga Barang : Rp{total_harga_barang}")
     print(f"Ongkir             : Rp{ongkir}")
     print(f"Biaya Admin        : Rp{admin}")
-    print(f"Diskon             : Rp{diskon}")
-    total = total_barang_harga + ongkir + admin - diskon
-    print("-------------------------------------")
-    print(f"TOTAL BAYAR        : Rp{total}")
+    print(f"Diskon             : -Rp{diskon}")
+    print("----------------------------------")
+
+    total_bayar = total_harga_barang + ongkir + admin - diskon
+    print(f"TOTAL BAYAR        : Rp{total_bayar}")
     print(f"Metode Pembayaran  : {metode}")
-    print(f"Sisa Saldo         : Rp{sisa_saldo}")
-    print("=====================================\n")
+
+    if metode != "Cash On Delivery":
+        print(f"Sisa Saldo         : Rp{sisa_saldo}")
+
+    print("===== TERIMA KASIH =====")
+
+# ====================================== PROGRAM UTAMA ===============================================
+# Ini aku pindah ke bawah karena aneh aja kalau def di bawah program utama 
+# aslinya harusnya masih kepanggil sih
+# cuma kayak jelek??? idkkk
+
+running = True
+while running:
+    print("============ MENU ============")
+    print("1. Lihat Daftar Barang")
+    print("2. Tambah Barang Ke Keranjang")
+    print("3. Hapus Barang Dari Keranjang")
+    print("4. Lihat Keranjang")
+    print("5. Checkout Barang")
+    print("6. Keluar")
+    print("==============================")
+    try:
+        menu = int(input("pilih menu(1-6): "))
+    except ValueError:
+        print("Input nggak valid, masukin angka 1-6.")
+        print()
+        continue
+    print()
+
+    if menu == 1:
+        show_products()
+
+    elif menu == 2:
+        try:
+            id = int(input("masukkan ID barang: "))
+            jumlah = int(input("jumlah: "))
+        except ValueError:
+            print("Input nggak valid, masukkan angka.")
+            print()
+            continue
+
+        if id in products:
+            produk, harga = products[id]
+            add_item(produk, harga, jumlah)
+        else:
+            print("ID barang tidak valid!")
+            print()
+
+    elif menu == 3:
+        view_cart()
+        produk = input("Produk yang ingin dihapus: ")
+        try:
+            jumlah = int(input("jumlah: "))
+        except ValueError:
+            print("Input nggak valid, masukkan angka.")
+            continue
+        remove_item(produk, jumlah)
+
+    elif menu == 4:
+        view_cart()
+        print()
+
+    elif menu == 5: #ini diganti aja, buat checkout disini
+        view_cart()
+        print()
+        checkout = input("buat pesanan?(yes/no): ").strip().lower()
+        print()
+        if checkout == "no" or checkout == "n":
+            print("kembali ke menu...")
+            print()
+        else:
+            if not keranjang:
+                print("Keranjang kosong. Tambah barang dulu sebelum checkout.\n")
+                continue
+
+            print("pesanan dibuat...")
+            print("estimasi waktu")
+
+            #Ini aku panggil sistem delivery
+            # MISAL toko ada di indeks 0 (Cibeusi), ganti jika perlu
+            toko_index = 0
+            lokasi_pembeli, jasa, estimasi_final, ongkir_final = proses_pengiriman(toko_index)
+
+            print(f"Estimasi waktu: {estimasi_final} menit")
+            print(f"Ongkir: Rp{ongkir_final}\n")
+
+            # lanjut pembayaran (kirim ongkir_final sebagai parameter)
+            pembayaran(ongkir_final)
+            # setelah selesai pembayaran, bisa lanjut atau keluar
+            running = False
+
+    elif menu == 6:
+        print("Keluar... terima kasih.")
+        running = False
+
+    else:
+        print("pilihan tidak valid!")
