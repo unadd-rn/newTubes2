@@ -112,6 +112,20 @@ kategori = {
             {"nama": "Bawang Merah 500gr", "harga": 15000},
             {"nama": "Tomat Merah 1kg", "harga": 15000},
             {"nama": "Tomat Ceri 250gr", "harga": 13000},
+        ],
+        "BUAH SEGAR": [
+            {"nama": "Apel Fuji Premium", "harga": 45000},
+            {"nama": "Pir Century", "harga": 32000},
+            {"nama": "Jeruk Sunkist", "harga": 42000},
+            {"nama": "Lemon Import", "harga": 30000},
+            {"nama": "Pisang Cavendish", "harga": 25000},
+            {"nama": "Mangga Harum Manis", "harga": 35000},
+            {"nama": "Nanas Madu Kupas", "harga": 15000},
+            {"nama": "Pepaya California", "harga": 12000},
+            {"nama": "Semangka Merah", "harga": 8000},
+            {"nama": "Melon", "harga": 20000},
+            {"nama": "Stroberi Lokal (Tray)", "harga": 35000},
+            {"nama": "Anggur Merah Seedless", "harga": 80000},
         ]
     },
 
@@ -140,14 +154,12 @@ kategori = {
     ],
 
     "PERAWATAN DIRI": {
-        "PERAWATAN_TUBUH": [
+        "PERAWATAN TUBUH": [
             {"nama": "Sabun Mandi Cair 450ml", "harga": 25000},
             {"nama": "Shampo 170ml", "harga": 20000},
             {"nama": "Pasta Gigi 150gr", "harga": 15000},
             {"nama": "Sikat Gigi Medium", "harga": 8000},
             {"nama": "Deodoran Roll-on", "harga": 20000},
-            {"nama": "Sabun Cuci Muka", "harga": 22000},
-            {"nama": "Hand Body Lotion 250ml", "harga": 25000},
             {"nama": "Sisir Rambut Plastik", "harga": 10000},
             {"nama": "Pencukur Sekali Pakai Pack 5", "harga": 18000},
             {"nama": "Kapas Wajah Kotak", "harga": 10000},
@@ -162,52 +174,194 @@ kategori = {
             {"nama": "Pensil Alis", "harga": 25000},
             {"nama": "Sheet Mask Satuan", "harga": 15000},
             {"nama": "Micellar Water 100ml", "harga": 28000},
-            {"nama": "Cat Kuku", "harga": 12000},
-            {"nama": "Parfum EDT 50ml", "harga": 75000},
         ]
     },
 
     "KEBUTUHAN RUMAH": {
-        "KEBERSIHAN_RUMAH": [
+        "KEBERSIHAN RUMAH": [
             {"nama": "Deterjen Bubuk 800gr", "harga": 28000},
             {"nama": "Pembersih Lantai 800ml", "harga": 18000},
             {"nama": "Pencuci Piring 800ml", "harga": 15000},
             {"nama": "Pemutih Pakaian 1L", "harga": 10000},
             {"nama": "Pelembut Pakaian 700ml", "harga": 20000},
             {"nama": "Pembersih Kaca 500ml", "harga": 17000},
-            {"nama": "Sabun Tangan Refill", "harga": 15000},
-            {"nama": "Sikat Baju", "harga": 5000},
-            {"nama": "Kain Pel Lantai", "harga": 15000},
+            {"nama": "Sabun Cuci Tangan Refill", "harga": 15000},
             {"nama": "Penghilang Noda Pakaian", "harga": 25000},
         ],
 
-        "PERLENGKAPAN_RUMAH": [
+        "PERLENGKAPAN RUMAH": [
             {"nama": "Tisu Wajah Box", "harga": 20000},
             {"nama": "Kantong Sampah Pack 20", "harga": 15000},
             {"nama": "Baterai AA Pack 4", "harga": 18000},
             {"nama": "Lampu LED 10W", "harga": 30000},
-            {"nama": "Korek Api Gas", "harga": 5000},
             {"nama": "Gembok Kecil", "harga": 25000},
-            {"nama": "Solasi Besar", "harga": 8000},
             {"nama": "Alumunium Foil Roll", "harga": 35000},
             {"nama": "Spons Cuci Piring Pack 3", "harga": 10000},
             {"nama": "Pengharum Ruangan Refill", "harga": 40000},
         ],
 
-        "PEMBASMI_HAMA": [
+        "PEMBASMI HAMA": [
             {"nama": "Obat Nyamuk Bakar Pack 10", "harga": 5000},
             {"nama": "Semprotan Anti Nyamuk 600ml", "harga": 35000},
             {"nama": "Perangkap Tikus Lem", "harga": 10000},
-            {"nama": "Kapur Ajaib Anti Semut", "harga": 8000},
-            {"nama": "Gel Pembasmi Kecoa", "harga": 25000},
-            {"nama": "Obat Anti Rayap Cair", "harga": 60000},
             {"nama": "Racun Tikus Padat", "harga": 15000},
-            {"nama": "Pengusir Kecoa Elektrik", "harga": 45000},
+            {"nama": "Kapur Ajaib Anti Semut", "harga": 8000},
+            {"nama": "Obat Anti Rayap Cair", "harga": 60000},
             {"nama": "Spray Pengusir Laba-laba", "harga": 30000},
             {"nama": "Anti Serangga Tanaman", "harga": 20000},
         ]
     }
 }
+
+kat_kelurahan = {
+    "Cikeruh": {
+        "MAKANAN": ["MAKANAN SIAP SAJI", "MAKANAN INSTAN", "MAKANAN RINGAN", "BAHAN MAKANAN", "BUAH SEGAR"],
+        "MINUMAN": [],
+        "ALAT TULIS": [],
+        "PERAWATAN DIRI": ["PERAWATAN TUBUH", "KOSMETIK"],
+        "KEBUTUHAN RUMAH": ["KEBERSIHAN RUMAH", "PERLENGKAPAN RUMAH", "PEMBASMI HAMA"]
+    },
+    "Cinta Mulya": {  # TOKO KECIL
+        "MAKANAN": ["MAKANAN INSTAN", "MAKANAN RINGAN"],
+        "MINUMAN": [],
+        "PERAWATAN DIRI": ["PERAWATAN TUBUH",],
+        "KEBUTUHAN RUMAH": ["KEBERSIHAN RUMAH", "PEMBASMI HAMA"]
+    },
+    "Cipacing": {  # toko sedang
+        "MAKANAN": ["MAKANAN INSTAN", "MAKANAN RINGAN", "BAHAN MAKANAN", "BUAH SEGAR"],
+        "MINUMAN": [],
+        "PERAWATAN DIRI": ["PERAWATAN TUBUH", "KOSMETIK"],
+        "KEBUTUHAN RUMAH": ["KEBERSIHAN RUMAH", "PERLENGKAPAN RUMAH", "PEMBASMI HAMA"]
+    },
+    "Hegarmanah": {
+        "MAKANAN": ["MAKANAN SIAP SAJI", "MAKANAN INSTAN", "MAKANAN RINGAN", "BAHAN MAKANAN", "BUAH SEGAR"],
+        "MINUMAN": [],
+        "PERAWATAN DIRI": ["PERAWATAN TUBUH", "KOSMETIK"],
+        "KEBUTUHAN RUMAH": ["KEBERSIHAN RUMAH", "PERLENGKAPAN RUMAH", "PEMBASMI HAMA"]
+    },
+    "Mekargalih": {
+        "MAKANAN": ["MAKANAN SIAP SAJI", "MAKANAN INSTAN", "MAKANAN RINGAN"],
+        "MINUMAN": [],
+        "PERAWATAN DIRI": ["PERAWATAN TUBUH"],
+        "KEBUTUHAN RUMAH": ["KEBERSIHAN RUMAH", "PEMBASMI HAMA"]
+    },
+    "Mekarwangi": {
+        "MAKANAN": ["MAKANAN SIAP SAJI", "MAKANAN INSTAN", "MAKANAN RINGAN", "BAHAN MAKANAN"],
+        "MINUMAN": [],
+        "ALAT TULIS": [],
+        "PERAWATAN DIRI": ["PERAWATAN TUBUH", "KOSMETIK"],
+        "KEBUTUHAN RUMAH": ["KEBERSIHAN RUMAH", "PERLENGKAPAN RUMAH", "PEMBASMI HAMA"]
+    },
+    "Sukajadi": {  # toko kecil
+        "MAKANAN": ["MAKANAN INSTAN", "MAKANAN RINGAN"],
+        "MINUMAN": [],
+        "ALAT TULIS": [],
+        "PERAWATAN DIRI": ["PERAWATAN TUBUH"],
+        "KEBUTUHAN RUMAH": ["KEBERSIHAN RUMAH", "PEMBASMI HAMA"]
+    },
+    "Sukamaju": {
+        "MAKANAN": ["MAKANAN SIAP SAJI", "MAKANAN INSTAN", "MAKANAN RINGAN", "BAHAN MAKANAN"],
+        "MINUMAN": [],
+        "ALAT TULIS": [],
+        "PERAWATAN DIRI": ["PERAWATAN TUBUH"],
+        "KEBUTUHAN RUMAH": ["KEBERSIHAN RUMAH", "PERLENGKAPAN RUMAH", "PEMBASMI HAMA"]
+    }
+}
+
+# ================================= KATEGORI ==========================================
+
+def print_kategori(lst):
+    for i, item in enumerate(lst, 1):
+        print(f"{i}. {item}")
+
+
+def print_barang(lst):
+    for i, brg in enumerate(lst, 1):
+        print(f"{i}. {brg['nama']} - Rp{brg['harga']}")
+    print(f"{len(lst)+1}. Kembali")
+
+
+# ============================================
+# 1. PILIH KELURAHAN
+# ============================================
+print("===== PILIH KELURAHAN =====")
+for i, k in enumerate(kelurahan, 1):
+    print(f"{i}. {k}")
+
+idx_kel = int(input("Pilih nomor: ")) - 1
+kel_terpilih = kelurahan[idx_kel]
+
+print(f"\nKelurahan dipilih: {kel_terpilih}")
+
+# kategori yg tersedia di kelurahan itu
+kat_tersedia = kat_kelurahan.get(kel_terpilih, {})
+kat_list = list(kat_tersedia.keys())
+
+
+# ============================================
+# 2. MENU KATEGORI
+# ============================================
+while True:
+    print("\n===== DAFTAR KATEGORI =====")
+    print_kategori(kat_list)
+    print(f"{len(kat_list)+1}. Selesai")
+
+    pilih_kat = int(input("Pilih kategori: "))
+    if pilih_kat == len(kat_list) + 1:
+        break
+
+    nama_kat = kat_list[pilih_kat - 1]
+
+    # subkategori yg ada di kelurahan ini
+    sub_kel = kat_tersedia[nama_kat]
+    isi_kat_global = kategori[nama_kat]        # data lengkap kategori
+
+    # ============================================
+    # 3A. KATEGORI TANPA SUBKATEGORI
+    # ============================================
+    if sub_kel == []:      # ← GANTI INI, tidak pakai isinstance lagi
+        while True:
+            print(f"\n===== {nama_kat} =====")
+            print_barang(isi_kat_global)
+            pilih_brg = int(input("Pilih barang: "))
+
+            if pilih_brg == len(isi_kat_global) + 1:
+                break
+
+            brg = isi_kat_global[pilih_brg - 1]
+            print(f"Anda memilih: {brg['nama']} - Rp{brg['harga']}")
+
+        continue
+
+
+    # ============================================
+    # 4. PILIH SUBKATEGORI
+    # ============================================
+    while True:
+        print(f"\n===== {nama_kat} =====")
+        print_kategori(sub_kel)
+        print(f"{len(sub_kel)+1}. Kembali")
+
+        pilih_sub = int(input("Pilih subkategori: "))
+        if pilih_sub == len(sub_kel) + 1:
+            break
+
+        nama_sub = sub_kel[pilih_sub - 1]
+        daftar_barang = isi_kat_global[nama_sub]
+
+        # ============================================
+        # 5. PILIH BARANG
+        # ============================================
+        while True:
+            print(f"\n===== {nama_sub} =====")
+            print_barang(daftar_barang)
+            pilih_brg = int(input("Pilih barang: "))
+
+            if pilih_brg == len(daftar_barang) + 1:
+                break
+
+            brg = daftar_barang[pilih_brg - 1]
+            print(f"Anda memilih: {brg['nama']} - Rp{brg['harga']}")
 
 # ====================================== KERANJANG ===============================================
 
