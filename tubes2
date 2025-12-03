@@ -221,7 +221,7 @@ def total_barang():
 
 
 #=== Bayar ====
-def pembayaran(ongkir_final):
+def pembayaran(ongkir):
     #ini gw tambahin biaya admin karena kocak dikit aoawkoawkaow
     biaya_admin = 1000
 
