@@ -671,6 +671,8 @@ while running:
     elif menu == 2:
         if not keranjang:
             print("\nKeranjang kosong, tidak ada barang untuk dihapus.")
+            print("Tekan Enter untuk melanjutkan...")
+            input()
         else:
             view_cart()
             print("\nHapus Barang dari Keranjang")
@@ -696,7 +698,7 @@ while running:
             input()
             continue
         
-        print("\n" + "="*40)
+        print("="*40)
         print("CHECKOUT")
         print("="*40)
         checkout = input("Lanjutkan checkout? (y/n): ").lower()
@@ -718,13 +720,13 @@ while running:
             if lanjut_bayar == 'y':
                 pembayaran(ongkir_final)
                 running = False
-                print("\nProgram selesai. Terima kasih!")
+                print("Pembelian selesai. Terima kasih!")
             else:
-                print("\nCheckout dibatalkan, kembali ke menu utama.")
+                print("Checkout dibatalkan, kembali ke menu utama.")
                 print("Tekan Enter untuk melanjutkan...")
                 input()
         else:
-            print("\nCheckout dibatalkan, kembali ke menu utama.")
+            print("Checkout dibatalkan, kembali ke menu utama.")
             print("Tekan Enter untuk melanjutkan...")
             input()
     
@@ -735,7 +737,7 @@ while running:
             if konfirmasi != 'y':
                 continue
         
-        print("\n" + "="*40)
+        print("="*40)
         print("TERIMA KASIH TELAH MENGGUNAKAN")
         print("SISTEM DELIVERY TOKO!")
         print("="*40)
