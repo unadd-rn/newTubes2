@@ -658,11 +658,43 @@ for i, k in enumerate(kelurahan, 1):
 kel_user = None   # menyimpan kelurahan yang dipilih user
 idx_kel = 0
 while True:
-    idx_kel = int(input("Pilih nomor: ")) - 1
-    if 0 <= idx_kel < len(kelurahan):
+    try:
+        idx_kel = int(input("Pilih nomor: ")) - 1
+        if 0 <= idx_kel < len(kelurahan):
+            break
+        else:
+            print("Pilihan tidak valid! Pilih nomor 1-12")
+    except ValueError:
+        print("Input harus angka! Pilih nomor 1-12")
+
+kel_terpilih = kelurahan[idx_kel]
+kel_user = kel_terpilih               # SIMPAN SEKALI DI AWAL
+print(f"\n✓ Kelurahan Anda: {kel_terpilih}")
+
+# ============================================
+# 2. PILIH CABANG TERDEKAT
+# ============================================
+list_cabang = list(cabang_toko.keys())
+idx_user = kelurahan.index(kel_terpilih)
+
+print("\n" + "="*40)
+print(f"DAFTAR CABANG")
+print("="*40)
+
+for i, cab in enumerate(list_cabang, 1):
+    idx_cab = kelurahan.index(cab)
+    dist = jarak[idx_user][idx_cab]
+    print(f"{i}. {cabang_toko[cab]} ({dist:.1f} km)")
+
+# input pilihan cabang
+while True:
+    pilih = int(input("Pilih Cabang: "))
+    if 1 <= pilih <= len(list_cabang):
+        kel_terpilih = list_cabang[pilih - 1]
+        print(f"\n✓ Cabang dipilih: {cabang_toko[kel_terpilih]}")
         break
     else:
-        print("Pilihan tidak valid! Pilih nomor 1-12")
+        print(f"Pilihan tidak valid! Pilih nomor 1-{len(list_cabang)}")
 
 kel_terpilih = kelurahan[idx_kel]
 kel_user = kel_terpilih               # SIMPAN SEKALI DI AWAL
@@ -721,6 +753,9 @@ while running:
     menu = int(input("Pilih menu (1-5): "))
 
     if menu == 1:
+        # HAPUS: Bagian pilih cabang di sini (karena sudah dipilih di awal)
+        # LANGSUNG: Tampilkan kategori barang dari cabang yang sudah dipilih
+
         while True:
             produk, harga, status = show_products_from_category()
 
