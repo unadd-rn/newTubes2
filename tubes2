@@ -251,6 +251,17 @@ kategori = {
     }
 }
 
+cabang_toko = {
+    "Cikeruh":     "AlfaIndo Cikeruh Central",    # BESAR
+    "Cinta Mulya": "AlfaIndo Cinta Mulya Express",  # KECIL
+    "Cipacing":    "AlfaIndo Cipacing Prime",     # MID
+    "Hegarmanah":  "AlfaIndo Hegarmanah Central",  # BESAR
+    "Mekargalih":  "AlfaIndo Mekargalih Express",  # KECIL
+    "Mekarwangi":  "AlfaIndo Mekarwangi Prime",   # MID
+    "Sukajadi":    "AlfaIndo Sukajadi Express",   # KECIL
+    "Sukamaju":    "AlfaIndo Sukamaju Prime"      # MID
+}
+
 kat_kelurahan = {
     "Cikeruh": {
         "MAKANAN": ["MAKANAN SIAP SAJI", "MAKANAN INSTAN", "MAKANAN RINGAN", "BAHAN MAKANAN", "BUAH SEGAR"],
