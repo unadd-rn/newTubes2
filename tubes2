@@ -517,11 +517,16 @@ def proses_pengiriman(lokasi_toko, kel_user):
         e_ongkir = ongkir_dasar + efek["ongkir"]
         print(f"{i+1}. {j} | Estimasi {e_waktu} menit | Rp{e_ongkir}")
 
-    while True:
-        pilih_jasa = int(input("Jenis jasa: ")) - 1
-        if 0 <= pilih_jasa < len(jasa_list):
-            break
-        print("Opsi tidak valid.")
+    pilihan = False
+    while not pilihan:
+        while True:
+            pilih_jasa = int(input("Jenis jasa: ")) - 1
+
+            if 0 <= pilih_jasa < len(jasa_list):
+                pilihan = True
+            else:
+                print("Opsi yang kamu pilih tidak valid, coba lagi ya...")
+                break
 
     jasa = jasa_list[pilih_jasa]
     efek = jasa_pengiriman[jasa]
@@ -691,6 +696,35 @@ while True:
     else:
         print(f"Pilihan tidak valid! Pilih nomor 1-{len(list_cabang)}")
 
+kel_terpilih = kelurahan[idx_kel]
+kel_user = kel_terpilih               # SIMPAN SEKALI DI AWAL
+print(f"\n✓ Kelurahan Anda: {kel_terpilih}")
+
+# ============================================
+# 2. PILIH CABANG TERDEKAT
+# ============================================
+list_cabang = list(cabang_toko.keys())
+idx_user = kelurahan.index(kel_terpilih)
+
+print("\n" + "="*40)
+print(f"DAFTAR CABANG")
+print("="*40)
+
+for i, cab in enumerate(list_cabang, 1):
+    idx_cab = kelurahan.index(cab)
+    dist = jarak[idx_user][idx_cab]
+    print(f"{i}. {cabang_toko[cab]} ({dist:.1f} km)")
+
+# input pilihan cabang
+while True:
+    pilih = int(input("Pilih Cabang: "))
+    if 1 <= pilih <= len(list_cabang):
+        kel_terpilih = list_cabang[pilih - 1]
+        print(f"\n✓ Cabang dipilih: {cabang_toko[kel_terpilih]}")
+        break
+    else:
+        print(f"Pilihan tidak valid! Pilih nomor 1-{len(list_cabang)}")
+
 # Simpan indeks cabang untuk perhitungan ongkir nanti
 idx_cabang_aktif = kelurahan.index(kel_terpilih)
 
@@ -716,13 +750,7 @@ while running:
     print("5. Keluar")
     print("="*40)
 
-    try:
-        menu = int(input("Pilih menu (1-5): "))
-    except ValueError:
-        print("Input harus angka! Pilih 1-5")
-        print("Tekan Enter untuk melanjutkan...")
-        input()
-        continue
+    menu = int(input("Pilih menu (1-5): "))
 
     if menu == 1:
         # HAPUS: Bagian pilih cabang di sini (karena sudah dipilih di awal)
@@ -757,14 +785,11 @@ while running:
             print("-"*30)
             produk = input("Nama barang yang ingin dihapus: ")
 
-            try:
-                jumlah = int(input("Jumlah yang ingin dihapus: "))
-                if jumlah > 0:
-                    remove_item(produk, jumlah)
-                else:
-                    print("Jumlah harus lebih dari 0")
-            except ValueError:
-                print("Input harus angka!")
+            jumlah = int(input("Jumlah yang ingin dihapus: "))
+            if jumlah > 0:
+                remove_item(produk, jumlah)
+            else:
+                print("Jumlah harus lebih dari 0")
 
     elif menu == 3:
         view_cart()
@@ -795,7 +820,7 @@ while running:
             print("\nMemproses pengiriman...")
             # MODIFIKASI: Gunakan idx_cabang_aktif yang sudah disimpan
             lokasi_pembeli, jasa, estimasi_final, ongkir_final = proses_pengiriman(
-                idx_cabang_aktif, kel_user)  # Gunakan idx_cabang_aktif, bukan idx_kel
+                idx_cabang_aktif, kel_user)
 
             print(f"\n=== RINGKASAN PENGIRIMAN ===")
             print(f"Toko Pengirim: {cabang_toko[kel_terpilih]}")
