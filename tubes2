@@ -1,7 +1,7 @@
-#DESKRIPSI
-#Sistem delivery yang memungkinkan pengguna untuk memilih dari beberapa opsi, memasukkan ke kantung belanja, menghitung ongkos kirim, dan melakukan pembayaran
+# DESKRIPSI
+# Sistem delivery yang memungkinkan pengguna untuk memilih dari beberapa opsi, memasukkan ke kantung belanja, menghitung ongkos kirim, dan melakukan pembayaran
 
-#KAMUS
+# KAMUS
 # Keranjang & Produk
 # keranjang = list - item pembelian (string)
 # harga_barang = list - harga masing-masing barang (int)
@@ -52,31 +52,31 @@ kelurahan = ["Cibeusi", "Cikeruh", "Cilayung", "Cileles",
              "Mekargalih", "Mekarwangi", "Sukajadi", "Sukamaju"]
 
 jarak = [
- [0.0,1.2,2.0,3.0,1.5,3.2,3.8,4.5,5.2,5.5,3.6,4.0],
- [1.2,0.0,1.1,2.3,1.0,2.9,3.5,4.0,4.7,5.1,3.2,3.8],
- [2.0,1.1,0.0,1.8,1.5,2.4,3.0,3.6,4.2,4.6,2.9,3.4],
- [3.0,2.3,1.8,0.0,2.4,2.0,2.7,3.1,3.7,4.1,2.3,2.8],
- [1.5,1.0,1.5,2.4,0.0,2.8,3.4,4.0,4.8,5.1,3.3,3.9],
- [3.2,2.9,2.4,2.0,2.8,0.0,1.3,1.9,3.1,3.6,1.8,2.5],
- [3.8,3.5,3.0,2.7,3.4,1.3,0.0,1.2,2.5,3.0,2.1,2.7],
- [4.5,4.0,3.6,3.1,4.0,1.9,1.2,0.0,1.8,2.3,2.7,3.2],
- [5.2,4.7,4.2,3.7,4.8,3.1,2.5,1.8,0.0,1.2,3.5,3.9],
- [5.5,5.1,4.6,4.1,5.1,3.6,3.0,2.3,1.2,0.0,3.9,4.2],
- [3.6,3.2,2.9,2.3,3.3,1.8,2.1,2.7,3.5,3.9,0.0,1.3],
- [4.0,3.8,3.4,2.8,3.9,2.5,2.7,3.2,3.9,4.2,1.3,0.0]
+    [0.0, 1.2, 2.0, 3.0, 1.5, 3.2, 3.8, 4.5, 5.2, 5.5, 3.6, 4.0],
+    [1.2, 0.0, 1.1, 2.3, 1.0, 2.9, 3.5, 4.0, 4.7, 5.1, 3.2, 3.8],
+    [2.0, 1.1, 0.0, 1.8, 1.5, 2.4, 3.0, 3.6, 4.2, 4.6, 2.9, 3.4],
+    [3.0, 2.3, 1.8, 0.0, 2.4, 2.0, 2.7, 3.1, 3.7, 4.1, 2.3, 2.8],
+    [1.5, 1.0, 1.5, 2.4, 0.0, 2.8, 3.4, 4.0, 4.8, 5.1, 3.3, 3.9],
+    [3.2, 2.9, 2.4, 2.0, 2.8, 0.0, 1.3, 1.9, 3.1, 3.6, 1.8, 2.5],
+    [3.8, 3.5, 3.0, 2.7, 3.4, 1.3, 0.0, 1.2, 2.5, 3.0, 2.1, 2.7],
+    [4.5, 4.0, 3.6, 3.1, 4.0, 1.9, 1.2, 0.0, 1.8, 2.3, 2.7, 3.2],
+    [5.2, 4.7, 4.2, 3.7, 4.8, 3.1, 2.5, 1.8, 0.0, 1.2, 3.5, 3.9],
+    [5.5, 5.1, 4.6, 4.1, 5.1, 3.6, 3.0, 2.3, 1.2, 0.0, 3.9, 4.2],
+    [3.6, 3.2, 2.9, 2.3, 3.3, 1.8, 2.1, 2.7, 3.5, 3.9, 0.0, 1.3],
+    [4.0, 3.8, 3.4, 2.8, 3.9, 2.5, 2.7, 3.2, 3.9, 4.2, 1.3, 0.0]
 ]
 
 tarif_per_km = 7000
-waktu_per_km = 25 # menit
+waktu_per_km = 25  # menit
 
 # ============================================
 # DATA JASA PENGIRIMAN
 # ============================================
 
 jasa_pengiriman = {
-    "Ekonomis": {"waktu": +10,"ongkir": -2000},
+    "Ekonomis": {"waktu": +10, "ongkir": -2000},
     "Reguler":  {"waktu": 0,  "ongkir": 0},
-    "Express":  {"waktu": -10,"ongkir": +2000}
+    "Express":  {"waktu": -10, "ongkir": +2000}
 }
 
 # ============================================
@@ -84,15 +84,15 @@ jasa_pengiriman = {
 # ============================================
 
 metode_list = [
-  "GoPay / GoPay Later",
-  "Shopeepay / SPayLater",
-  "DANA",
-  "OVO",
-  "blu by BCA Digital",
-  "BCA Virtual Account",
-  "Mandiri Virtual Account",
-  "Transfer Bank Lainnya",
-  "Cash On Delivery"
+    "GoPay / GoPay Later",
+    "Shopeepay / SPayLater",
+    "DANA",
+    "OVO",
+    "blu by BCA Digital",
+    "BCA Virtual Account",
+    "Mandiri Virtual Account",
+    "Transfer Bank Lainnya",
+    "Cash On Delivery"
 ]
 
 # ============================================
@@ -251,6 +251,17 @@ kategori = {
     }
 }
 
+cabang_toko = {
+    "Cikeruh":     "AlfaIndo Cikeruh Central",    # BESAR
+    "Cinta Mulya": "AlfaIndo Cinta Mulya Express",  # KECIL
+    "Cipacing":    "AlfaIndo Cipacing Prime",     # MID
+    "Hegarmanah":  "AlfaIndo Hegarmanah Central",  # BESAR
+    "Mekargalih":  "AlfaIndo Mekargalih Express",  # KECIL
+    "Mekarwangi":  "AlfaIndo Mekarwangi Prime",   # MID
+    "Sukajadi":    "AlfaIndo Sukajadi Express",   # KECIL
+    "Sukamaju":    "AlfaIndo Sukamaju Prime"      # MID
+}
+
 kat_kelurahan = {
     "Cikeruh": {
         "MAKANAN": ["MAKANAN SIAP SAJI", "MAKANAN INSTAN", "MAKANAN RINGAN", "BAHAN MAKANAN", "BUAH SEGAR"],
@@ -306,110 +317,137 @@ kat_kelurahan = {
     }
 }
 
+
 # ================================= KATEGORI FUNCTIONS ==========================================
+
 
 def print_kategori(lst):
     for i, item in enumerate(lst, 1):
         print(f"{i}. {item}")
+
 
 def print_barang(lst):
     for i, brg in enumerate(lst, 1):
         print(f"{i}. {brg['nama']} - Rp{brg['harga']}")
     print(f"{len(lst)+1}. Kembali")
 
+
+def print_kelurahan():
+    print("===== PILIH KELURAHAN =====")
+    for i, k in enumerate(kelurahan, 1):
+        print(f"{i}. {k}")
+
+
+def print_cabang_dengan_jarak(kelurahan_user):
+    idx_user = kelurahan.index(kelurahan_user)
+    cabang_list = list(cabang_toko.keys())
+
+    print("\n===== DAFTAR CABANG TERDEKAT =====")
+    for i, kel_cabang in enumerate(cabang_list, 1):
+        idx_cabang = kelurahan.index(kel_cabang)
+        dist = jarak[idx_user][idx_cabang]
+        print(f"{i}. {cabang_toko[kel_cabang]} ({dist} km)")
+
+    print(f"{len(cabang_list)+1}. Kembali")
+
 # ================================= KERANJANG FUNCTIONS ==========================================
 
+
 keranjang = {}
+
 
 def get_cart_summary():
     jumlah_barang = 0
     total_harga = 0
-    
+
     for produk, detail in keranjang.items():
         jumlah_barang += detail["jumlah"]
         total_harga += detail["harga"] * detail["jumlah"]
-    
+
     return jumlah_barang, total_harga
 
-def show_products_from_category(): 
+
+def show_products_from_category():
     print("===== PILIH KATEGORI =====")
-    
+
     # Dapatkan kategori yang tersedia untuk kelurahan ini
     kat_tersedia = kat_kelurahan.get(kel_terpilih, {})
     kat_list = list(kat_tersedia.keys())
-    
+
     for i, kat in enumerate(kat_list, 1):
         print(f"{i}. {kat}")
     print(f"{len(kat_list)+1}. Kembali ke Menu Utama")
 
     pilih_kat = int(input("Pilih kategori: "))
-    
+
     if pilih_kat == len(kat_list) + 1:
         return None, None, "back"
-    
+
     if pilih_kat < 1 or pilih_kat > len(kat_list):
         print("Pilihan tidak valid!")
         return None, None, None
-    
+
     nama_kat = kat_list[pilih_kat - 1]
     sub_kel = kat_tersedia[nama_kat]
     isi_kat_global = kategori[nama_kat]
-    
+
     # Jika tidak ada subkategori (MINUMAN, ALAT TULIS)
     if sub_kel == []:
         print(f"\n===== {nama_kat} =====")
         print_barang(isi_kat_global)
-        
+
         pilih_brg = int(input("Pilih barang: "))
-        
+
         if pilih_brg == len(isi_kat_global) + 1:
             return None, None, "kembali"
-        
+
         if pilih_brg < 1 or pilih_brg > len(isi_kat_global):
             print("Pilihan tidak valid!")
             return None, None, None
-        
+
         brg = isi_kat_global[pilih_brg - 1]
         return brg['nama'], brg['harga'], "success"
-    
+
     # Jika ada subkategori
     else:
         while True:
             print(f"\n===== {nama_kat} =====")
             print_kategori(sub_kel)
             print(f"{len(sub_kel)+1}. Kembali")
-            
+
             pilih_sub = int(input("Pilih subkategori: "))
-            
+
             if pilih_sub == len(sub_kel) + 1:
                 return None, None, "kembali"
-            
+
             if pilih_sub < 1 or pilih_sub > len(sub_kel):
                 print("Pilihan tidak valid!")
                 continue
-            
+
             nama_sub = sub_kel[pilih_sub - 1]
             daftar_barang = isi_kat_global[nama_sub]
-            
+
             print(f"\n===== {nama_sub} =====")
             print_barang(daftar_barang)
 
             pilih_brg = int(input("Pilih barang: "))
-            
+
             if pilih_brg == len(daftar_barang) + 1:
                 continue
-            
+
             if pilih_brg < 1 or pilih_brg > len(daftar_barang):
                 print("Pilihan tidak valid!")
                 continue
-            
+
             brg = daftar_barang[pilih_brg - 1]
             return brg['nama'], brg['harga'], "success"
+
 
 def add_item(produk, harga, jumlah):
     if produk in keranjang:
         keranjang[produk]["jumlah"] += jumlah
-        print(f"\n{jumlah} x {produk} ditambahkan ke keranjang (Total: {keranjang[produk]['jumlah']})")
+        print(
+            f"\n{jumlah} x {produk} ditambahkan ke keranjang (Total: {keranjang[produk]['jumlah']})")
     elif jumlah <= 0:
         print(f"\nMinimal pembelian 1 barang!")
         return
@@ -417,17 +455,20 @@ def add_item(produk, harga, jumlah):
         keranjang[produk] = {"harga": harga, "jumlah": jumlah}
         print(f"\n{jumlah} x {produk} ditambahkan ke keranjang")
 
+
 def remove_item(produk, jumlah):
     if produk not in keranjang:
         print("\nBarang tidak ditemukan di keranjang!")
         return
-    
+
     if jumlah >= keranjang[produk]["jumlah"]:
         del keranjang[produk]
         print(f"\n{produk} dihapus sepenuhnya dari keranjang!")
     else:
         keranjang[produk]["jumlah"] -= jumlah
-        print(f"\n{jumlah} x {produk} dihapus dari keranjang (Sisa: {keranjang[produk]['jumlah']})")
+        print(
+            f"\n{jumlah} x {produk} dihapus dari keranjang (Sisa: {keranjang[produk]['jumlah']})")
+
 
 def view_cart():
     print("\n" + "="*30)
@@ -452,29 +493,18 @@ def view_cart():
 
 # ================================= DELIVERY FUNCTIONS ==========================================
 
+
 def hitung_jarak(toko, pembeli):
     idx_toko = toko
     idx_pembeli = kelurahan.index(pembeli)
     return jarak[idx_toko][idx_pembeli]
 
-def proses_pengiriman(lokasi_toko):
-    print("\n=== PILIH LOKASI PEMBELI ===")
-    for i, lok in enumerate(kelurahan):
-        print(f"{i+1}. {lok}")
 
-    inputlokasi = False
-    while not inputlokasi:
-        idx = int(input("Lokasi pembeli: ")) - 1
+def proses_pengiriman(lokasi_toko, kel_user):
+    # langsung pakai kel_user tanpa input ulang
+    idx_pembeli = kelurahan.index(kel_user)
 
-        if 0 <= idx <= 11:
-            inputlokasi = True
-        else:
-            print("Lokasi yang kamu pilih tidak valid, coba lagi ya...")
-    
-    lokasi_pembeli = kelurahan[idx]
-
-    # Hitung jarak dan ongkir dasar
-    d = hitung_jarak(lokasi_toko, lokasi_pembeli)
+    d = hitung_jarak(lokasi_toko, kel_user)
     ongkir_dasar = int(d * tarif_per_km)
     waktu_awal = int(d * waktu_per_km)
 
@@ -487,30 +517,30 @@ def proses_pengiriman(lokasi_toko):
         e_ongkir = ongkir_dasar + efek["ongkir"]
         print(f"{i+1}. {j} | Estimasi {e_waktu} menit | Rp{e_ongkir}")
 
-    pilihan = False
-    while not pilihan:
+    while True:
         pilih_jasa = int(input("Jenis jasa: ")) - 1
-
         if 0 <= pilih_jasa < len(jasa_list):
-            pilihan = True
-        else:
-            print("Opsi yang kamu pilih tidak valid, coba lagi ya...")
-    
+            break
+        print("Opsi tidak valid.")
+
     jasa = jasa_list[pilih_jasa]
     efek = jasa_pengiriman[jasa]
 
     estimasi_final = waktu_awal + efek["waktu"]
     ongkir_final = ongkir_dasar + efek["ongkir"]
 
-    return lokasi_pembeli, jasa, estimasi_final, ongkir_final
+    return kel_user, jasa, estimasi_final, ongkir_final
+
 
 # ================================= PEMBAYARAN FUNCTIONS ==========================================
+
 
 def total_barang_in_cart():
     total = 0
     for produk, detail in keranjang.items():
         total += detail["harga"] * detail["jumlah"]
     return total
+
 
 def pembayaran(ongkir_parameter):
     biaya_admin = 1000
@@ -577,13 +607,15 @@ def pembayaran(ongkir_parameter):
         cetak_struk(ongkir, biaya_admin, diskon, metode, sisa_saldo)
         return True
 
+
 def cetak_struk(ongkir, admin, diskon, metode, sisa_saldo):
     total_harga_barang = total_barang_in_cart()
-    
+
     print("Barang yang dibeli:")
     for produk, detail in keranjang.items():
         subtotal = detail["harga"] * detail["jumlah"]
-        print(f"- {produk} ({detail['jumlah']} x Rp{detail['harga']}) = Rp{subtotal}")
+        print(
+            f"- {produk} ({detail['jumlah']} x Rp{detail['harga']}) = Rp{subtotal}")
 
     print("-"*30)
     print(f"Total Harga Barang : Rp{total_harga_barang}")
@@ -605,6 +637,7 @@ def cetak_struk(ongkir, admin, diskon, metode, sisa_saldo):
 
 # ================================= PROGRAM UTAMA ===============================================
 
+
 print("\n" + "="*40)
 print("SISTEM DELIVERY TOKO")
 print("="*40)
@@ -612,32 +645,68 @@ print("="*40)
 # ============================================
 # 1. PILIH KELURAHAN
 # ============================================
-print("\n===== PILIH KELURAHAN =====")
+alamat = input("Masukkan Alamat Lengkap Anda: ")
+print("\n===== PILIH KELURAHAN ANDA =====")
 for i, k in enumerate(kelurahan, 1):
     print(f"{i}. {k}")
 
+kel_user = None   # menyimpan kelurahan yang dipilih user
 idx_kel = 0
 while True:
-    idx_kel = int(input("Pilih nomor: ")) - 1
-    if 0 <= idx_kel < len(kelurahan):
-        break
-    else:
-        print("Pilihan tidak valid! Pilih nomor 1-12")
+    try:
+        idx_kel = int(input("Pilih nomor: ")) - 1
+        if 0 <= idx_kel < len(kelurahan):
+            break
+        else:
+            print("Pilihan tidak valid! Pilih nomor 1-12")
+    except ValueError:
+        print("Input harus angka! Pilih nomor 1-12")
 
 kel_terpilih = kelurahan[idx_kel]
-print(f"\nKelurahan dipilih: {kel_terpilih}")
+kel_user = kel_terpilih               # SIMPAN SEKALI DI AWAL
+print(f"\n✓ Kelurahan Anda: {kel_terpilih}")
 
 # ============================================
-# 2. MENU UTAMA
+# 2. PILIH CABANG TERDEKAT
+# ============================================
+list_cabang = list(cabang_toko.keys())
+idx_user = kelurahan.index(kel_terpilih)
+
+print("\n" + "="*40)
+print(f"DAFTAR CABANG")
+print("="*40)
+
+for i, cab in enumerate(list_cabang, 1):
+    idx_cab = kelurahan.index(cab)
+    dist = jarak[idx_user][idx_cab]
+    print(f"{i}. {cabang_toko[cab]} ({dist:.1f} km)")
+
+# input pilihan cabang
+while True:
+    pilih = int(input("Pilih Cabang: "))
+    if 1 <= pilih <= len(list_cabang):
+        kel_terpilih = list_cabang[pilih - 1]
+        print(f"\n✓ Cabang dipilih: {cabang_toko[kel_terpilih]}")
+        break
+    else:
+        print(f"Pilihan tidak valid! Pilih nomor 1-{len(list_cabang)}")
+
+# Simpan indeks cabang untuk perhitungan ongkir nanti
+idx_cabang_aktif = kelurahan.index(kel_terpilih)
+
+# ============================================
+# 3. MENU UTAMA
 # ============================================
 running = True
 while running:
     # Tampilkan ringkasan keranjang di header
     jumlah_barang, total_harga = get_cart_summary()
-    
+
     print("\n" + "="*40)
     print("MENU UTAMA")
     print("="*40)
+    # TAMBAHAN: Tampilkan cabang aktif di header
+    print(f"📍 Cabang: {cabang_toko[kel_terpilih]}")
     print(f"📦 Keranjang: {jumlah_barang} barang | Total: Rp{total_harga}")
     print("-"*40)
     print("1. Lihat dan Tambah Barang")
@@ -646,13 +715,22 @@ while running:
     print("4. Checkout")
     print("5. Keluar")
     print("="*40)
-    
-    menu = int(input("Pilih menu (1-5): "))
-    
+
+    try:
+        menu = int(input("Pilih menu (1-5): "))
+    except ValueError:
+        print("Input harus angka! Pilih 1-5")
+        print("Tekan Enter untuk melanjutkan...")
+        input()
+        continue
+
     if menu == 1:
+        # HAPUS: Bagian pilih cabang di sini (karena sudah dipilih di awal)
+        # LANGSUNG: Tampilkan kategori barang dari cabang yang sudah dipilih
+
         while True:
             produk, harga, status = show_products_from_category()
-            
+
             if status == "back":
                 break
             elif status == "kembali":
@@ -667,7 +745,7 @@ while running:
             lanjut = input("\nTambah barang lain? (y/n): ").lower()
             if lanjut != 'y':
                 break
-    
+
     elif menu == 2:
         if not keranjang:
             print("\nKeranjang kosong, tidak ada barang untuk dihapus.")
@@ -678,18 +756,22 @@ while running:
             print("\nHapus Barang dari Keranjang")
             print("-"*30)
             produk = input("Nama barang yang ingin dihapus: ")
-            jumlah = int(input("Jumlah yang ingin dihapus: "))
-            if jumlah > 0:
-                remove_item(produk, jumlah)
-            else:
-                print("Jumlah harus lebih dari 0")
+
+            try:
+                jumlah = int(input("Jumlah yang ingin dihapus: "))
+                if jumlah > 0:
+                    remove_item(produk, jumlah)
+                else:
+                    print("Jumlah harus lebih dari 0")
+            except ValueError:
+                print("Input harus angka!")
 
     elif menu == 3:
         view_cart()
         if keranjang:
             print("\nTekan Enter untuk kembali ke menu utama...")
             input()
-    
+
     elif menu == 4:
         total = view_cart()
         if total == 0:
@@ -697,25 +779,34 @@ while running:
             print("Tekan Enter untuk kembali ke menu utama...")
             input()
             continue
-        
+
         print("="*40)
         print("CHECKOUT")
         print("="*40)
+        # TAMBAHAN: Tampilkan informasi cabang di checkout
+        print(f"📍 Cabang Toko: {cabang_toko[kel_terpilih]}")
+        print(f"🏠 Lokasi Anda: {alamat}, {kel_user}")
+        print(f"📦 Total Belanja: Rp{total}")
+        print("-"*40)
+
         checkout = input("Lanjutkan checkout? (y/n): ").lower()
-        
+
         if checkout == 'y':
             print("\nMemproses pengiriman...")
-            lokasi_pembeli, jasa, estimasi_final, ongkir_final = proses_pengiriman(idx_kel)
-            
+            # MODIFIKASI: Gunakan idx_cabang_aktif yang sudah disimpan
+            lokasi_pembeli, jasa, estimasi_final, ongkir_final = proses_pengiriman(
+                idx_cabang_aktif, kel_user)  # Gunakan idx_cabang_aktif, bukan idx_kel
+
             print(f"\n=== RINGKASAN PENGIRIMAN ===")
-            print(f"Lokasi Pembeli: {lokasi_pembeli}")
+            print(f"Toko Pengirim: {cabang_toko[kel_terpilih]}")
+            print(f"Lokasi Pembeli: {alamat}, {lokasi_pembeli}")
             print(f"Jasa Pengiriman: {jasa}")
             print(f"Estimasi Waktu: {estimasi_final} menit")
             print(f"Biaya Ongkir: Rp{ongkir_final}")
             print(f"Total Belanja: Rp{total}")
             print(f"Total + Ongkir: Rp{total + ongkir_final}")
             print("-"*40)
-            
+
             lanjut_bayar = input("Lanjutkan ke pembayaran? (y/n): ").lower()
             if lanjut_bayar == 'y':
                 pembayaran(ongkir_final)
@@ -729,20 +820,20 @@ while running:
             print("Checkout dibatalkan, kembali ke menu utama.")
             print("Tekan Enter untuk melanjutkan...")
             input()
-    
+
     elif menu == 5:
         if keranjang:
             print("Keranjang belum kosong!")
             konfirmasi = input("Yakin ingin keluar? (y/n): ").lower()
             if konfirmasi != 'y':
                 continue
-        
+
         print("="*40)
         print("TERIMA KASIH TELAH MENGGUNAKAN")
         print("SISTEM DELIVERY TOKO!")
         print("="*40)
         running = False
-    
+
     else:
         print("Pilihan tidak valid! Pilih 1-5")
         print("Tekan Enter untuk melanjutkan...")
