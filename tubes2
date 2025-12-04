@@ -656,17 +656,14 @@ for i, k in enumerate(kelurahan, 1):
 kel_user = None   # menyimpan kelurahan yang dipilih user
 idx_kel = 0
 while True:
-    try:
-        idx_kel = int(input("Pilih nomor: ")) - 1
-        if 0 <= idx_kel < len(kelurahan):
-            break
-        else:
-            print("Pilihan tidak valid! Pilih nomor 1-12")
-    except ValueError:
-        print("Input harus angka! Pilih nomor 1-12")
+    idx_kel = int(input("Pilih nomor: ")) - 1
+    if 0 <= idx_kel < len(kelurahan):
+        break
+    else:
+        print("Pilihan tidak valid! Pilih nomor 1-12")
 
 kel_terpilih = kelurahan[idx_kel]
-kel_user = kel_terpilih               # SIMPAN SEKALI DI AWAL
+kel_user = kel_terpilih               
 print(f"\n✓ Kelurahan Anda: {kel_terpilih}")
 
 # ============================================
@@ -702,7 +699,6 @@ idx_cabang_aktif = kelurahan.index(kel_terpilih)
 # ============================================
 running = True
 while running:
-    # Tampilkan ringkasan keranjang di header
     jumlah_barang, total_harga = get_cart_summary()
 
     print("\n" + "="*40)
@@ -722,8 +718,6 @@ while running:
     menu = int(input("Pilih menu (1-5): "))
 
     if menu == 1:
-        # HAPUS: Bagian pilih cabang di sini (karena sudah dipilih di awal)
-        # LANGSUNG: Tampilkan kategori barang dari cabang yang sudah dipilih
 
         while True:
             produk, harga, status = show_products_from_category()
@@ -777,7 +771,6 @@ while running:
         print("="*40)
         print("CHECKOUT")
         print("="*40)
-        # TAMBAHAN: Tampilkan informasi cabang di checkout
         print(f"📍 Cabang Toko: {cabang_toko[kel_terpilih]}")
         print(f"🏠 Lokasi Anda: {alamat}, {kel_user}")
         print(f"📦 Total Belanja: Rp{total}")
@@ -787,7 +780,6 @@ while running:
 
         if checkout == 'y':
             print("\nMemproses pengiriman...")
-            # MODIFIKASI: Gunakan idx_cabang_aktif yang sudah disimpan
             lokasi_pembeli, jasa, estimasi_final, ongkir_final = proses_pengiriman(
                 idx_cabang_aktif, kel_user)
 
