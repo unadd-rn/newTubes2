@@ -696,35 +696,6 @@ while True:
     else:
         print(f"Pilihan tidak valid! Pilih nomor 1-{len(list_cabang)}")
 
-kel_terpilih = kelurahan[idx_kel]
-kel_user = kel_terpilih               # SIMPAN SEKALI DI AWAL
-print(f"\n✓ Kelurahan Anda: {kel_terpilih}")
-
-# ============================================
-# 2. PILIH CABANG TERDEKAT
-# ============================================
-list_cabang = list(cabang_toko.keys())
-idx_user = kelurahan.index(kel_terpilih)
-
-print("\n" + "="*40)
-print(f"DAFTAR CABANG")
-print("="*40)
-
-for i, cab in enumerate(list_cabang, 1):
-    idx_cab = kelurahan.index(cab)
-    dist = jarak[idx_user][idx_cab]
-    print(f"{i}. {cabang_toko[cab]} ({dist:.1f} km)")
-
-# input pilihan cabang
-while True:
-    pilih = int(input("Pilih Cabang: "))
-    if 1 <= pilih <= len(list_cabang):
-        kel_terpilih = list_cabang[pilih - 1]
-        print(f"\n✓ Cabang dipilih: {cabang_toko[kel_terpilih]}")
-        break
-    else:
-        print(f"Pilihan tidak valid! Pilih nomor 1-{len(list_cabang)}")
-
 # Simpan indeks cabang untuk perhitungan ongkir nanti
 idx_cabang_aktif = kelurahan.index(kel_terpilih)
 
