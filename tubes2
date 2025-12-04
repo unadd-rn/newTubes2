@@ -333,12 +333,12 @@ def print_barang(lst):
 
 
 def print_kelurahan():
-    print("===== PILIH KELURAHAN =====")
+    print("===== PILIH KELURAHAN ANDA =====")
     for i, k in enumerate(kelurahan, 1):
         print(f"{i}. {k}")
 
 
-def print_cabang_dengan_jarak(kelurahan_user):
+def print_cabang_jarak(kelurahan_user):
     idx_user = kelurahan.index(kelurahan_user)
     cabang_list = list(cabang_toko.keys())
 
@@ -649,11 +649,8 @@ print("="*40)
 # 1. PILIH KELURAHAN
 # ============================================
 alamat = input("Masukkan Alamat Lengkap Anda: ")
-print("\n===== PILIH KELURAHAN ANDA =====")
-for i, k in enumerate(kelurahan, 1):
-    print(f"{i}. {k}")
+print_kelurahan()
 
-kel_user = None   # menyimpan kelurahan yang dipilih user
 idx_kel = 0
 while True:
     idx_kel = int(input("Pilih nomor: ")) - 1
@@ -662,26 +659,21 @@ while True:
     else:
         print("Pilihan tidak valid! Pilih nomor 1-12")
 
-kel_terpilih = kelurahan[idx_kel]
-kel_user = kel_terpilih               
-print(f"\n✓ Kelurahan Anda: {kel_terpilih}")
+kel_user = kelurahan[idx_kel]
+print(f"\n✓ Kelurahan Anda: {kel_user}")
 
 # ============================================
 # 2. PILIH CABANG TERDEKAT
 # ============================================
-list_cabang = list(cabang_toko.keys())
-idx_user = kelurahan.index(kel_terpilih)
 
 print("\n" + "="*40)
 print(f"DAFTAR CABANG")
 print("="*40)
 
-for i, cab in enumerate(list_cabang, 1):
-    idx_cab = kelurahan.index(cab)
-    dist = jarak[idx_user][idx_cab]
-    print(f"{i}. {cabang_toko[cab]} ({dist:.1f} km)")
+print_cabang_jarak(kel_user)
 
 # input pilihan cabang
+list_cabang = list(cabang_toko.keys())
 while True:
     pilih = int(input("Pilih Cabang: "))
     if 1 <= pilih <= len(list_cabang):
