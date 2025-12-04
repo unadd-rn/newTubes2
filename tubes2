@@ -342,7 +342,7 @@ def print_cabang_jarak(kelurahan_user):
     idx_user = kelurahan.index(kelurahan_user)
     cabang_list = list(cabang_toko.keys())
 
-    print("\n===== DAFTAR CABANG TERDEKAT =====")
+    print("\n======= DAFTAR CABANG =======")
     for i, kel_cabang in enumerate(cabang_list, 1):
         idx_cabang = kelurahan.index(kel_cabang)
         dist = jarak[idx_user][idx_cabang]
@@ -665,7 +665,6 @@ print(f"\n✓ Kelurahan Anda: {kel_user}")
 # ============================================
 # 2. PILIH CABANG TERDEKAT
 # ============================================
-
 print("\n" + "="*40)
 print(f"DAFTAR CABANG")
 print("="*40)
